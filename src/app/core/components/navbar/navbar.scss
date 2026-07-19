@@ -57,13 +57,13 @@ nav a:hover {
 }
 
 .leaf {
-    width: 90px;
+    width: 100px;
     display: block;
     transform-origin: 15% 5%; // ponto onde o ramo "está preso"
     transition: transform .4s ease;
     will-change: transform;
     animation: wind 2.2s ease-in-out infinite;
-    opacity: 70%;
+    opacity: 0.9;
 }
 
 

@@ -1,0 +1,35 @@
+.principal{
+    position: relative;   /* referência para o texto */
+    width: 100%;
+}
+
+.principal img{
+    display: block;
+    width: 100%;
+    height: 60rem;
+    object-fit: cover;
+    opacity: 0.5;
+}
+
+.principal .texto-principal{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: x-large;
+    position: absolute;
+    top: 40px;
+    left: 50px;
+
+    color: rgb(0, 79, 0);
+    z-index: 1;           /* fica por cima da imagem */
+
+    max-width: 500px;
+
+    p{
+        font-size: large;
+        font-family: Verdana, Geneva, Tahoma, sans-serif ;
+        opacity: 70%;
+    }
+}
+
+.carrosel-de-produtos{
+    background-color: #f8f1e9;
+}
