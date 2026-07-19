@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { Navbar } from "../../core/components/navbar/navbar";
 
 @Component({
   selector: 'app-candle-page',
-  imports: [],
+  imports: [Navbar],
   templateUrl: './candle-page.html',
   styleUrl: './candle-page.css',
 })

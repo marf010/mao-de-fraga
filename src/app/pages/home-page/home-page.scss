@@ -1,0 +1,183 @@
+// Importar fontes
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap');
+
+$font-title: 'Cormorant Garamond', serif;
+$font-text: 'Montserrat', sans-serif;
+
+body{
+    margin: 0;
+}
+
+header{
+    position: absolute;
+    top: 30px;
+    left: 50px;
+    z-index: 100;
+}
+
+.logo{
+    width: 9rem;
+    height: auto;
+}
+
+.principal{
+    position: relative;   /* referência para o texto */
+    width: 100%;
+}
+
+.principal img{
+    display: block;
+    width: 100%;
+    height: 60rem;
+    object-fit: cover;
+    opacity: 0.9;
+}
+
+.principal .texto-principal{
+    font-family: $font-title;
+    font-size: 1.7rem;
+    font-weight: 400;
+    line-height: 1.2;
+    position: absolute;
+    top: 40px;
+    left: 50px;
+    font-style: italic;
+    color: #4C5A45;
+    z-index: 1;           /* fica por cima da imagem */
+
+    max-width: 500px;
+
+    p{
+        font-size: 1.2rem;
+        font-family:  $font-text;
+        color: #4C5A45;
+    }
+}
+
+.btn {
+  font-family: $font-text;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  color: #4C5A45;
+  background: transparent;
+
+  border: 1px solid #4C5A45;
+  padding: 14px 28px;
+
+  transition: .3s ease;
+
+  &:hover {
+    background: #4C5A45;
+    color: white;
+    cursor: pointer;
+  }
+}
+
+.beneficios{
+    display: flex;
+    justify-content: center; 
+    align-items: center;  
+    flex-direction: column;  
+    text-align: center;      
+    background-color: #4C5A45;
+    height: 20rem;
+
+}
+
+.beneficio-texto{
+
+    padding-left: 2rem;
+    padding-right: 0;
+    background-color: transparent;
+    font-family: $font-title;
+    font-size: xxx-large;
+
+    left: 50px;
+    color:#f8f1e9;
+}
+
+.beneficio-sub-texto{
+    align-items: flex-start;
+    padding-left: 2rem;
+    padding-right: 0;
+    background-color: transparent;
+    font-family: $font-text;
+    font-size: x-large;
+
+    left: 50px;
+    color:#f8f1e9;
+}
+
+
+.carrosel-de-produtos{
+    background-color: #4C5A45;
+}
+
+.caracteristicas {
+    background: #694b00;
+    padding: 4rem 2rem;
+
+    p {
+        margin: 0 auto;
+        max-width: 900px;
+
+        font-family: $font-text;
+        font-size: 1.25rem;
+        line-height: 1.8;
+        text-align: center;
+
+        color: #f8f1e9;
+    }
+}
+
+
+
+.contacto {
+    background: #f8f1e9;
+    padding: 3rem 1.5rem;
+    text-align: center;
+
+    .mapa {
+        width: 100%;
+        max-width: 1000px;
+        margin: 3rem auto;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+
+        iframe {
+            display: block;
+            width: 100%;
+            height: 450px;
+            border: 0;
+        }
+    }
+
+    p {
+        margin: 0;
+        color: #4b5b43;
+        font-size: 2rem;
+        line-height: 1.8;
+        font-family: $font-title;
+    }
+
+    b {
+        color: #36532d;
+        font-weight: 600;
+    }
+
+    a {
+        color: #36532d;
+        text-decoration: none;
+        font-weight: 600;
+        border-bottom: 2px solid transparent;
+        transition: all .3s ease;
+
+        &:hover {
+            border-color: #36532d;
+        }
+    }
+}

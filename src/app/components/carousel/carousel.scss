@@ -1,7 +1,7 @@
 .carousel {
     margin: 0;
     width: 100%;
-    padding: 10px 10px;
+    padding: 0;
 
     display: flex;
     gap: 1rem;
@@ -16,7 +16,7 @@
 }
 
 .carousel img {
-    width: 1000px;
+    width: 600px;
     height: 300px;
     object-fit: cover;
     border-radius: 20px;
