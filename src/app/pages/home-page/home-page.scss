@@ -28,33 +28,27 @@ header{
 .principal img{
     display: block;
     width: 100%;
-    height: 60rem;
+    height: 46rem;
     object-fit: cover;
     opacity: 0.9;
 }
 
 .principal .texto-principal{
     font-family: $font-title;
-    font-size: 1.7rem;
+    font-size: 2.0rem;
     font-weight: 400;
     line-height: 1.2;
     position: absolute;
     top: 40px;
     left: 50px;
-    font-style: italic;
     color: #4C5A45;
-    z-index: 1;           /* fica por cima da imagem */
+    z-index: 1;      /* fica por cima da imagem */
 
     max-width: 500px;
 
-    p{
-        font-size: 1.2rem;
-        font-family:  $font-text;
-        color: #4C5A45;
-    }
 }
 
-.btn {
+.btn_colecao {
   font-family: $font-text;
   font-size: 0.95rem;
   font-weight: 500;
@@ -82,18 +76,23 @@ header{
     align-items: center;  
     flex-direction: column;  
     text-align: center;      
-    background-color: #4C5A45;
-    height: 20rem;
+    
+    height: 30rem;
+
+    background-image: url('../../../../public/back.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 
 }
 
 .beneficio-texto{
-
+    padding-bottom: 3.5rem;
     padding-left: 2rem;
     padding-right: 0;
     background-color: transparent;
     font-family: $font-title;
-    font-size: xxx-large;
+    font-size: 3rem;
 
     left: 50px;
     color:#f8f1e9;
@@ -111,9 +110,29 @@ header{
     color:#f8f1e9;
 }
 
+.btn_sobre{    
+  font-family: $font-text;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #36532d;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+
+  background-color: rgb(219, 188, 108);
+  border: 1px solid #4C5A45;
+  padding: 10px 28px;
+
+  transition: .3s ease;
+
+  &:hover {
+    background: #4C5A45;
+    color: white;
+    cursor: pointer;
+  }
+}
 
 .carrosel-de-produtos{
-    background-color: #4C5A45;
+    background-color: #3c442c;
 }
 
 .caracteristicas {

@@ -15,4 +15,8 @@ export class HomePage {
   irParaColecao() {
     this.router.navigate(['/velas']);
   }
+
+  irParaSobre() {
+    this.router.navigate(['/sobre']);
+  }
 }
