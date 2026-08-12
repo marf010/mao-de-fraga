@@ -1,2 +1,30 @@
 <app-navbar></app-navbar>
-<p>soap-page works!</p>
+
+<section class="soap-page">
+
+    <div class="container">
+
+        <div class="page-header">
+            <h1>Os Nossos Sabões</h1>
+            <p>Descobre diversos sabonetes 100% naturais e 100% vegetais</p>
+        </div>
+
+        <div class="products-grid">
+
+            <div class="product-card" *ngFor="let product of products">
+
+                <img [src]="product.image" [alt]="product.name">
+
+                <div class="content">
+                    <h3>{{ product.name }}</h3>
+                    <!-- <p>{{ product.description }}</p> -->
+
+                    <!-- <div class="bottom"> -->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+</section>

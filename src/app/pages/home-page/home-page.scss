@@ -4,199 +4,359 @@
 $font-title: 'Cormorant Garamond', serif;
 $font-text: 'Montserrat', sans-serif;
 
-body{
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-header{
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+header {
     position: absolute;
-    top: 30px;
-    left: 50px;
+    top: 2rem;
+    left: 3rem;
     z-index: 100;
 }
 
-.logo{
-    width: 9rem;
+.logo {
+    width: clamp(5rem, 8vw, 9rem);
     height: auto;
 }
 
-.principal{
-    position: relative;   /* referência para o texto */
+/* ===========================
+   HERO
+=========================== */
+
+.principal {
+    position: relative;
     width: 100%;
 }
 
-.principal img{
+.principal img {
     display: block;
+    height: 60rem;
     width: 100%;
-    height: 46rem;
     object-fit: cover;
-    opacity: 0.9;
+    opacity: .9;
 }
 
-.principal .texto-principal{
-    font-family: $font-title;
-    font-size: 2.0rem;
-    font-weight: 400;
-    line-height: 1.2;
+.principal .texto-principal {
     position: absolute;
-    top: 40px;
-    left: 50px;
+    top: 3rem;
+    left: 3rem;
+    z-index: 2;
+
+    width: min(90%, 520px);
+
+    font-family: $font-title;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 400;
+    line-height: 1.3;
+
     color: #4C5A45;
-    z-index: 1;      /* fica por cima da imagem */
-
-    max-width: 500px;
-
 }
+
+/* ===========================
+   BOTÕES
+=========================== */
 
 .btn_colecao {
-  font-family: $font-text;
-  font-size: 0.95rem;
-  font-weight: 500;
-  letter-spacing: 2px;
-  text-transform: uppercase;
 
-  color: #4C5A45;
-  background: transparent;
+    margin-top: 2rem;
 
-  border: 1px solid #4C5A45;
-  padding: 14px 28px;
+    font-family: $font-text;
+    font-size: .95rem;
+    font-weight: 500;
 
-  transition: .3s ease;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 
-  &:hover {
-    background: #4C5A45;
-    color: white;
-    cursor: pointer;
-  }
+    color: #4C5A45;
+    background: transparent;
+
+    border: 1px solid #4C5A45;
+    padding: 14px 28px;
+
+    transition: .3s ease;
+
+    &:hover {
+        background: #4C5A45;
+        color: white;
+        cursor: pointer;
+    }
 }
 
-.beneficios{
+.btn_sobre {
+
+    margin-top: 2rem;
+
+    font-family: $font-text;
+    font-size: .95rem;
+    font-weight: 500;
+
+    letter-spacing: 3px;
+    text-transform: uppercase;
+
+    color: #36532d;
+    background: rgb(219, 188, 108);
+
+    border: 1px solid #4C5A45;
+    padding: 12px 28px;
+
+    transition: .3s ease;
+
+    &:hover {
+        background: #4C5A45;
+        color: white;
+        cursor: pointer;
+    }
+}
+
+/* ===========================
+   BENEFÍCIOS
+=========================== */
+
+.beneficios {
+
     display: flex;
-    justify-content: center; 
-    align-items: center;  
-    flex-direction: column;  
-    text-align: center;      
-    
-    height: 30rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 5rem 2rem;
+
+    min-height: 30rem;
 
     background-image: url('../../../../public/back.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
 }
 
-.beneficio-texto{
-    padding-bottom: 3.5rem;
-    padding-left: 2rem;
-    padding-right: 0;
-    background-color: transparent;
+.beneficio-texto {
+
+    margin-bottom: 2rem;
+
     font-family: $font-title;
-    font-size: 3rem;
 
-    left: 50px;
-    color:#f8f1e9;
+    font-size: clamp(2rem, 5vw, 3rem);
+
+    color: #f8f1e9;
 }
 
-.beneficio-sub-texto{
-    align-items: flex-start;
-    padding-left: 2rem;
-    padding-right: 0;
-    background-color: transparent;
+.beneficio-sub-texto {
+
+    max-width: 900px;
+
+    margin-bottom: 0.5rem;
+    margin-top: 2rem;
     font-family: $font-text;
-    font-size: x-large;
 
-    left: 50px;
-    color:#f8f1e9;
+    font-size: clamp(1rem, 2vw, 1.35rem);
+
+    line-height: 1.8;
+
+    color: #f8f1e9;
 }
 
-.btn_sobre{    
-  font-family: $font-text;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #36532d;
-  letter-spacing: 3px;
-  text-transform: uppercase;
+/* ===========================
+   CARROSSEL
+=========================== */
 
-  background-color: rgb(219, 188, 108);
-  border: 1px solid #4C5A45;
-  padding: 10px 28px;
-
-  transition: .3s ease;
-
-  &:hover {
-    background: #4C5A45;
-    color: white;
-    cursor: pointer;
-  }
+.carrosel-de-produtos {
+    background: #3c442c;
 }
 
-.carrosel-de-produtos{
-    background-color: #3c442c;
-}
+/* ======================================================
+                TABLETS
+====================================================== */
 
-.caracteristicas {
-    background: #694b00;
-    padding: 4rem 2rem;
+@media (max-width: 1024px) {
 
-    p {
-        margin: 0 auto;
-        max-width: 900px;
-
-        font-family: $font-text;
-        font-size: 1.25rem;
-        line-height: 1.8;
-        text-align: center;
-
-        color: #f8f1e9;
+    header {
+        left: 2rem;
+        top: 1.5rem;
     }
+
+    .principal .texto-principal {
+        left: 2rem;
+        top: 6rem;
+        width: 70%;
+    }
+
+    .beneficios {
+        padding: 4rem 2rem;
+    }
+
+    .beneficio-sub-texto{
+        margin-top: 4rem;
+    }
+
 }
 
+/* ======================================================
+                MOBILE
+====================================================== */
 
+@media (max-width: 768px) {
 
-.contacto {
-    background: #f8f1e9;
-    padding: 3rem 1.5rem;
-    text-align: center;
+    header {
 
-    .mapa {
-        width: 100%;
-        max-width: 1000px;
-        margin: 3rem auto;
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        left: 1.2rem;
+        top: 1rem;
+    }
 
-        iframe {
-            display: block;
-            width: 100%;
-            height: 450px;
-            border: 0;
+    .principal img {
+        opacity: 67%;
+        height: 80vh;
+        min-height: 500px;
+    }
+
+    .principal .texto-principal {
+        color: #132904;
+        top: 6.5rem;
+        left: 1.2rem;
+        right: 1.2rem;
+
+        width: auto;
+
+        font-size: 1.45rem;
+        line-height: 1.4;
+    }
+
+    .btn_colecao{
+        background: #4C5A45;
+        color: white;
+        cursor: pointer;
+
+        display: flex;
+        justify-content: center;
+
+        &:hover{
+            color: #4C5A45;
+            background: transparent;
         }
     }
 
-    p {
-        margin: 0;
-        color: #4b5b43;
+    .btn_colecao,
+    .btn_sobre {
+        width: 50%;
+        max-width: 280px;
+
+        font-size: .9rem;
+
+        padding: 14px;
+    }
+
+    .beneficios {
+
+        padding: 4rem 1.5rem;
+
+        min-height: auto;
+    }
+
+    .beneficio-texto {
+
         font-size: 2rem;
+    }
+
+    .beneficio-sub-texto {
+
+        font-size: 1rem;
+
         line-height: 1.8;
-        font-family: $font-title;
     }
 
-    b {
-        color: #36532d;
-        font-weight: 600;
+    .carrosel-de-produtos {
+        background: #3c442c;
+}
+
+}
+
+/* ======================================================
+                MOBILE PEQUENO
+====================================================== */
+
+@media (max-width: 480px) {
+
+    header {
+
+        left: 1rem;
+        top: .8rem;
     }
 
-    a {
-        color: #36532d;
-        text-decoration: none;
-        font-weight: 600;
-        border-bottom: 2px solid transparent;
-        transition: all .3s ease;
+    .logo {
 
-        &:hover {
-            border-color: #36532d;
-        }
+        width: 5rem;
     }
+
+    .principal img {
+
+        height: 85vh;
+    }
+
+    .principal .texto-principal {
+
+        top: 5.5rem;
+
+        font-size: 1.2rem;
+
+        line-height: 1.5;
+    }
+
+    .btn_colecao,
+    .btn_sobre {
+
+        max-width: 100%;
+
+        font-size: .8rem;
+
+        letter-spacing: 1px;
+    }
+
+    .beneficio-texto {
+
+        font-size: 1.7rem;
+    }
+
+    .beneficio-sub-texto {
+
+        font-size: .95rem;
+    }
+
+}
+
+/* ======================================================
+                ECRÃS MUITO GRANDES
+====================================================== */
+
+@media (min-width: 1600px) {
+
+    .principal .texto-principal {
+
+        max-width: 700px;
+
+        font-size: 3rem;
+    }
+
+    .beneficio-texto {
+
+        font-size: 3.5rem;
+    }
+
+    .beneficio-sub-texto {
+
+        font-size: 1.5rem;
+    }
+
 }

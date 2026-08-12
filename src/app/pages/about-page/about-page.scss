@@ -1,148 +1,760 @@
+/* ================= NAVBAR ================= */
 
 .navbar {
-  height: 120px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    height: 120px;
 
-  padding: 0 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-  background: #b1b8af;;
+    padding: 0 80px;
 
-  position: sticky;
-  z-index: 100;
+    background: transparent; /* sem fundo */
 
-  box-shadow: 0 10px 10px rgba(0, 87, 14, 0.203);
-}
+    position: absolute; /* fica sobre a imagem */
+    top: 0;
+    left: 0;
 
-img {
-  width: 10rem;
-  height: auto;
+    width: 90%;
+
+    z-index: 100;
+
+    box-shadow: none; /* remove a sombra */
 }
 
 nav {
-  display: flex;
-  gap: 100px;
+    display: flex;
+    gap: 100px;
 }
 
 nav a {
-  text-decoration: none;
-  color: #124419;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: 500;
-  transition: .3s;
-  position: relative;
+    text-decoration: none;
+
+    color: #fff;
+
+    font-family: "Segoe UI", sans-serif;
+    font-weight: 500;
+
+    transition: .3s;
+
+    position: relative;
+
+    text-shadow: 0 2px 10px rgba(0,0,0,.5);
 }
 
 nav a:hover {
-  color: #5d8c63;
+    color: #d8e8d2;
 }
 
 .active::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -8px;
+    content: "";
 
-  width: 100%;
-  height: 2px;
+    position: absolute;
 
-  background: #355E3B;
+    left: 0;
+    bottom: -8px;
+
+    width: 100%;
+    height: 2px;
+
+    background: #fff;
 }
+
+/* ================= PLANTA ================= */
 
 .leaf-container {
     position: absolute;
     top: 0;
     left: 0;
-    overflow: visible;
 }
 
 .leaf {
-    width: 100px;
-    display: block;
-    transform-origin: 15% 5%; // ponto onde o ramo "está preso"
-    transition: transform .4s ease;
-    will-change: transform;
+    width: 300px;
+    transform-origin: 15% 5%;
     animation: wind 2.2s ease-in-out infinite;
-    opacity: 0.9;
 }
 
-
-// .leaf-container:hover .leaf {
-    
-// }
-
-//animação do vento
 @keyframes wind {
+
     0% {
         transform: rotate(0deg);
     }
 
-    15% {
+    20% {
         transform: rotate(4deg);
     }
 
 }
 
-/* tablet layout */
-@media (max-width: 768px) {
-  .navbar {
-    padding: 0 25px;
-  }
 
-  img {
-    width: 8rem;
-  }
 
-  nav {
-    gap: 20px;
-  }
 
-  nav a {
-    font-size: 0.95rem;
-  }
-}
 
-/* phone layout */
-@media (max-width: 576px) {
-  .navbar {
-    padding: 15px;
-    height: auto;
-    flex-direction: column;
-    gap: 15px;
-  }
 
-  img {
-    width: 7rem;
-  }
 
-  nav {
-    width: 100%;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-  }
 
-  nav a {
-    font-size: 0.9rem;
-  }
 
-  .active::after {
-    bottom: -4px;
-  }
-}
 
-.nav{
-    background-color: #36532d;
-}
 
-.apresentacao{
+/* ================= APRESENTAÇÃO ================= */
+
+.apresentacao {
+    position: relative;
+    min-height: 100vh;
+
     display: flex;
-    justify-content: flex-end;
-    margin-left: auto;
-    padding-right: 25rem;
+    justify-content: center;
 
-    background-image: url('../../../../public/back_about.png');
-    width: 50rem;
-    height: 30rem;
+    padding: 150px 8%;
+
+    background: url('../../../../public/fraga_rocha.png') center/cover no-repeat;
+
+    overflow: hidden;
 }
+
+/* escurece ligeiramente a fotografia */
+
+.overlay{
+    position:absolute;
+    inset:0;
+
+    // background:linear-gradient(
+    //     rgba(0,0,0,.35),
+    //     rgba(0,0,0,.45)
+    // );
+
+    z-index:1;
+}
+
+/* ================= PAPEL ================= */
+
+.retangulo{
+    display: flex;
+    position:relative;
+
+    width:min(850px,90%);
+
+    z-index:2;
+
+    animation:desenrolar 1.2s ease;
+
+}
+
+h2{
+    display: flex;
+    justify-content: center;
+}
+
+.passo {
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(80px);
+    transition: 0.8s;
+
+    margin: 180px 0;
+
+}
+
+.passo.show{
+        opacity: 1;
+        transform: none;
+}
+
+.papel-conteudo{
+
+    position:relative;
+    padding:80px;
+
+    background:#fcfaf6;
+
+    padding:80px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 30px 70px rgba(0,0,0,.25);
+
+}
+
+/* textura muito subtil */
+
+.papel-conteudo::before{
+
+    content:"";
+
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+
+}
+
+/* ================= LOGO ================= */
+
+.logo{
+
+    display:flex;
+    justify-content:center;
+
+    animation:fadeUp .8s .5s both;
+
+}
+
+.logo img{
+
+    width:250px;
+
+}
+
+/* ================= TÍTULOS ================= */
+
+.retangulo h1{
+
+    text-align:center;
+
+    color:#355E3B;
+
+    font-size:3rem;
+
+    margin-bottom:20px;
+
+    animation:fadeUp .8s 1s both;
+
+}
+
+.linha{
+
+    width:90px;
+    height:3px;
+
+    background:#8fb46d;
+
+    margin:25px auto 45px;
+
+    border-radius:5px;
+
+    animation:expand .8s 1.2s both;
+
+}
+
+/* ================= TEXTO ================= */
+
+.retangulo p{
+
+    color:#444;
+
+    font-size:1.25rem;
+
+    line-height:2;
+
+    // text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+.retangulo strong{
+
+    color:#355E3B;
+
+}
+
+/* ================= ANIMAÇÕES ================= */
+
+.fade{
+
+    opacity:0;
+
+    transform:translateY(30px);
+
+    animation:fadeUp .8s forwards;
+
+}
+
+.delay1{animation-delay:1.2s;}
+.delay2{animation-delay:1.5s;}
+.delay3{animation-delay:1.8s;}
+.delay4{animation-delay:2.1s;}
+.delay5{animation-delay:2.4s;}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:none;
+    }
+
+}
+
+@keyframes expand{
+
+    from{
+
+        width:0;
+
+    }
+
+    to{
+
+        width:90px;
+
+    }
+
+}
+
+@keyframes desenrolar{
+
+    from{
+
+        opacity:0;
+        transform:translateY(80px) scaleY(.2);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:none;
+
+    }
+
+}
+
+/* ================= RESPONSIVO ================= */
+
+@media(max-width:900px){
+
+    .papel-conteudo{
+
+        padding:40px;
+
+    }
+
+    .retangulo h1{
+
+        font-size:2.2rem;
+
+    }
+
+    .retangulo p{
+
+        font-size:1.1rem;
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .papel-conteudo{
+
+        padding:30px;
+
+    }
+
+    .logo img{
+
+        width:130px;
+
+    }
+
+    .retangulo h1{
+
+        font-size:1.8rem;
+
+    }
+
+}
+
+//TABLET
+
+@media (max-width: 1024px){
+
+    .navbar{
+        height:90px;
+        padding: 0 2rem;
+    }
+
+    nav{
+        gap:2rem;
+    }
+
+    .papel-conteudo{
+        padding:3rem;
+    }
+}
+
+//MOBILE
+
+@media (max-width: 768px){
+    .navbar{
+        height: 80px;
+        padding: 0 1rem;
+    }
+
+    nav{
+        gap:1.2rem;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    nav a{
+        font-size: 0.9rem;
+    }
+
+    .leaf{
+        width: 120px;
+    }
+
+    .apresentacao{
+        padding: 7rem 1rem 4rem;
+    }
+
+    .papel-conteudo{
+        padding: 2rem;
+    }
+
+    .passo{
+        margin: 5rem 0;
+    }
+
+}
+
+
+.produtos{
+    position: relative;
+    width: 100%;
+    min-height: 900px;
+
+
+    background-color: #bdbdad;
+    min-height: 900px;
+    background-image: url('../../../../public/background_about_2.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: brightness(93%);
+
+    overflow: hidden
+}
+
+.soap{
+    margin-top: -1%;
+    margin-right: 70%;
+    height: 100%;
+    width: 30%;
+}
+
+.soap_2{
+    margin-top: -10%;
+    margin-right: 60%;
+    height: 100%;
+    width: 50%;
+}
+
+// MOBILE
+// @media (max-width: 768px) {
+//     .soap{
+//         height: 20rem;
+//         width: 20rem;
+//         opacity: 70%;
+//     }
+
+//     .soap_2{
+//         margin: auto;
+//     }
+// }
+
+// MOBILE PEQUENO
+
+// @media (max-width:375px){
+//     .soap{
+//         height: 10rem;
+//         width: 10rem;
+//         opacity: 10%;
+//     }
+
+//     .soap_2{
+//         margin-top: 10%;
+//         margin-right: 30%;
+//         height: 100%;
+//         width: 50%;
+//     }
+// }
+
+    //TABLET
+    @media (max-width:1024px) {
+        .soap{
+            height: 30rem;
+            width: 25rem;
+            opacity: 70%;
+        }
+
+        .soap_2{
+            height: 20rem;
+            width: 25rem;
+            // margin-left: 20rem;
+            margin-top: 45%;
+            opacity: 70%;
+        }
+    }
+
+.produto-primeiro-texto{
+    position: absolute;
+    top: 50%;
+    right: 8%;
+    transform: translateY(-50%);
+
+    max-width: 520px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+
+    color: #3d332c;
+    z-index: 2;
+
+    h2{
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.8rem, 3vw, 4.2rem);
+        font-weight: 600;
+        line-height: 1.05;
+        letter-spacing: -1px;
+        margin: 0;
+    }
+    p{
+        font-family: "Poppins", sans-serif;
+        font-size: 1.15rem;
+        line-height: 1.9;
+        font-weight: 400;
+        color: #65584d;
+        margin: 0;
+        max-width: 460px;
+    }
+    h5{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    //MOBILE
+    @media (max-width: 768px) {
+        .produto-primeiro-texto {
+            right: 50%;
+            transform: translate(50%, -50%);
+            align-items: center;
+            text-align: center;
+            max-width: 90%;
+        }
+
+        .produto-primeiro-texto h2 {
+            font-size: clamp(2.3rem, 3vw, 4.2rem);
+        }
+
+        .produto-primeiro-texto p {
+            margin-right: 1rem;
+            color: #130f0d;
+            text-align: center;
+            max-width: 100%;
+        }
+    }
+}
+
+
+
+.produtos-descricao{
+    position: relative;
+    width: 100%;
+    min-height: 900px;
+
+
+    background-color: #bdbdad;
+    min-height: 900px;
+    background-image: url('../../../../public/background_about_2_invertido.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: brightness(93%);
+
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+        background-image: url('../../../../public/background_invertido_mobile.png');
+    }
+}
+
+.produto-segundo-texto{
+    position: absolute;
+    bottom: 0%;
+    right: 50%;
+    transform: translateY(-50%);
+
+    max-width: 520px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+
+    color: #3d332c;
+    z-index: 2;
+
+    h2{
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.8rem, 3vw, 4.2rem);
+        font-weight: 600;
+        line-height: 1.05;
+        letter-spacing: -1px;
+        margin: 0;
+    }
+
+    p{
+        font-family: "Poppins", sans-serif;
+        font-size: 1.15rem;
+        line-height: 1.9;
+        font-weight: 400;
+        color: #65584d;
+        margin: 0;
+        max-width: 460px;
+    }
+
+    @media (max-width: 768px) {
+        position: static; // ou relative
+        transform: none;
+
+        width: 100%;
+        max-width: 100%;
+
+        padding: 2rem 1.5rem;
+
+        align-items: center;
+        text-align: center;
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 7rem;
+            margin-right: 3rem;
+        }
+
+        p {
+            width: 100%;
+            max-width: 100%;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-right: 3rem;
+        }
+    }
+}
+
+.produtos-final{
+    position: relative;
+    width: 100%;
+    min-height: 900px;
+
+
+    background-color: #bdbdad;
+    min-height: 900px;
+    background-image: url('../../../../public/background_about_3.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: brightness(93%);
+
+    overflow: hidden;
+
+    @media (max-width: 768px){
+        background-image: url('../../../../public/background_about_3_mobile.png');
+    }
+
+}
+
+.produto-terceito-texto{
+    position: absolute;
+    top: 30%;
+    right: 8%;
+    transform: translateY(-50%);
+
+    max-width: 520px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+
+    color: #3d332c;
+    z-index: 2;
+
+    
+
+    h2{
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.8rem, 3vw, 4.2rem);
+        font-weight: 500;
+        line-height: 1.05;
+        letter-spacing: 0.5px;
+        margin: 0;
+    }
+
+    @media (max-width: 768px){
+        h2{
+            letter-spacing:2px;
+            font-size: xx-large;
+        }
+    }
+}
+
+
+.about_last {
+    position: relative;
+    width: 100%;
+    min-height: 900px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #bdbdad;
+    background-image: url('../../../../public/fraga_rocha_last.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(93%);
+
+    overflow: hidden;
+
+    .about_last__content {
+        width: min(90%, 800px);
+        padding: 4rem;
+        background: rgba(236, 228, 220, 0.92); // #ece4dc com transparência
+        border-radius: 8px;
+        text-align: center;
+
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+
+        display: flex;
+        flex-direction: column;
+        gap: 1.8rem;
+    }
+
+    h2 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.8rem, 3vw, 4.2rem);
+        font-weight: 500;
+        line-height: 1.05;
+        letter-spacing: 0.5px;
+        margin: 0;
+        color: #3f362f;
+    }
+
+    p {
+        font-family: "Poppins", sans-serif;
+        font-size: 1.15rem;
+        line-height: 1.9;
+        font-weight: 400;
+        color: #65584d;
+        margin: 0;
+        max-width: 560px;
+        align-self: center;
+    }
+}
+

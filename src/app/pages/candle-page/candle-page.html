@@ -1,4 +1,26 @@
 <div id="colecao">
     <app-navbar></app-navbar>
-    <p>candle-page works!</p>
+    
+    <section class="candle-page">
+        <div class="container">
+            <div class="page-header">
+                <h1>As Nossas Velas</h1>
+                <p>Deixa-te envolver pelos aromas que podem transformar a tua casa.</p>
+            </div>
+
+            <div class="products-grid">
+
+                <div class="product-card" *ngFor="let product of products">
+                    <img [src]="product.image" [alt]="product.name">
+
+                    <div class="content">
+                        <h3>{{ product.name }}</h3>
+                    </div>
+                </div>
+            </div>   
+        </div>
+        
+
+        
+    </section>
 </div>

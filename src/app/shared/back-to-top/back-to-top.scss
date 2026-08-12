@@ -1,0 +1,26 @@
+.scrollTop{
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border: none;
+    background-color: #b8843d;
+    color: aliceblue;
+    cursor: pointer;
+    font-size: 24px;
+    transition: .3s;
+    z-index: 999;
+}
+
+.scrollTop:hover{
+    transform: translateY(-4px);
+}
+
+@media (max-width: 600px){
+    .scrollTop{
+        left: 30px;
+        width: 40px;
+        height: 35px;
+    }
+}
