@@ -1,0 +1,23 @@
+[
+    {
+        "id": 111,
+        "name": "Arranjo floral Bambu e Flor de Cerejeira",
+        "image": "arranjoBambuFlorDeCerejeira.png",
+        "images": ["arranjoBambuFlorDeCerejeira.png","bambuu.jpeg", "florDeCerejeira.jpeg", "bambuFlorDeCerejeira.jpeg"],
+        "description": "Arranjo floral com flores de cera de soja aromatizadas com fragância de Bambu e Flor de Cerejeira",
+        "size": "200g",
+        "composition":"",
+        "benefits":""
+    },
+
+     {
+        "id": 112,
+        "name": "Arranjo floral com Hortências",
+        "image": "arranjoEmCaixaCartaoHortencias.png",
+        "images": ["arranjoEmCaixaCartaoHortencias.png","horte.jpeg", "hotenciaa.jpeg", "hortencia.jpeg"],
+        "description": "Arranjo de flores em caixa de cartão, aromatizadas e hortências desidratadas",
+        "size": "200g",
+        "composition":"",
+        "benefits":""
+    }
+]

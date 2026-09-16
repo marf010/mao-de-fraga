@@ -1,30 +1,121 @@
-<app-navbar></app-navbar>
+<header class="navbar" [class.scrolled]="menuOpen()">
+    <a routerLink="/" class="logo">
+        <img src="logotipo.png" alt="Logo">
+    </a>
 
-<section class="soap-page">
+    <!-- <div class="leaf-container">
+        <img src="planta.png" alt="Planta decorativa" class="leaf">
+    </div> -->
 
-    <div class="container">
+    <!--METER O LOGOTIPOoo-->
 
-        <div class="page-header">
-            <h1>Os Nossos Sabões</h1>
-            <p>Descobre diversos sabonetes 100% naturais e 100% vegetais</p>
+    <!--mobile-->
+    <nav [class.open]="menuOpen()">
+        <a routerLink="/inicio" routerLinkActive="active" (click)="closeMenu()">INÍCIO</a>
+        <a routerLink="/sabões" routerLinkActive="active" (click)="closeMenu()">SABÕES</a>
+        <a routerLink="/velas" routerLinkActive="active" (click)="closeMenu()">VELAS</a>
+        <a routerLink="/arranjos" routerLinkActive="active" (click)="closeMenu()">ARRANJOS</a>
+        <a routerLink="/sobre" routerLinkActive="active" (click)="closeMenu()">SOBRE</a>
+    </nav>
+
+    <button
+        class="hamburger"
+        [class.open]="menuOpen()"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="menuOpen()"
+        aria-label="Abrir menu"
+    >
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</header>
+
+<!-- overlay que fecha o menu ao clicar fora -->
+<div class="menu-overlay" [class.visible]="menuOpen()" (click)="closeMenu()"></div>
+
+  <section class="soap-page">
+
+  <div class="video-container">
+    <video autoplay muted loop playsinline class="video-bg">
+      <source src="nature.mp4" type="video/mp4">
+    </video>
+    <div class="conteudo">
+      <h1>O segredo dos nossos sabonetes <br> está nos seus óleos</h1>      
+    </div>
+    <div class="propriedades">
+      <a class="icon-olives"></a>
+      <h5 >Azeite extra Virgem</h5>
+      <p class="descricao-propriedades">É a base nobre. <br> Rico em ácido oleico, polifenóis e vitamina K. 
+        <br> Deixa o sabonete muito suave e muito cremoso. <br> 
+        É emoliente, ajuda a não ressecar a pele e é ótimo para peles sensíveis, secas ou com tendência atópica.</p>
+      <br>
+      <br>
+      <br>
+      <a class="icon-coconut"></a>
+      <h5>Óleo de côco</h5>
+      <p class="descricao-propriedades">É o que dá espuma e poder de limpeza. <br>
+         Rico em ácido láurico, é antibacteriano e deixa a espuma abundante e consistente. <br>
+         Equilibra o azeite que quase não faz espuma.</p>
+      <br>
+      <br>
+      <br>
+      <a class="icon-sunflower"></a>
+      <h5>Óleo de girassol bio</h5>
+      <p class="descricao-propriedades">Muito rico em ácido linoleico e vitamina E natural. <br>
+         É leve, não comedogénico, ajuda a reparar a barreira cutânea e dá um toque mais hidratante, compensando o efeito mais detergente do côco.</p>
+      <br>
+      <br>
+      <a class="icon-castor-bean"></a>
+      <h5>Óleo de Rícino (<i>Ricinus Communis Seed Oil</i>) </h5>
+      <p class="descricao-propriedades">É o único com ácido ricinoleico. <br>
+        Hidratante poderoso e oclusivo: Não hidrata por si, mas forma um filme protetor que impede a perda de água. <br>
+        Excelente para zonas muito secas: pés, cotovelos, lábios gretados. <br>
+        Cicatrizante e antimicrobiano: O ácido ricinoleico é anti-inflamatório, antibacteriano e antifúngico. <br>
+        Muito usado em borbulhas, pequenas feridas, picadas e em peles com dermatite. <br>
+        É mágico. Mesmo só 5 a 10% transforma a espuma – deixa-a cremosa e densa. Aumenta a hidratação do sabonete de forma brutal. <br>
+        É o segredo dos sabonetes artesanais que parecem luxuosos. </p>
+      <br>
+      <br>
+      <br>
+      <a class="icon-shea"></a>
+      <h5>Manteiga de Karité ( <i>Butyrospermum Parkii Butte</i> )</h5>
+      <p class="descricao-propriedades">Composta de Ácido oleico, esteárico, linoleico, vitaminas A, E, F, cinnamatos – que dão proteção UV leve – e alantoína. <br>
+       É cicatrizante e anti-inflamatória natural. <br> Ótima para pele atópica, gretada, com eczema, assaduras de bebé, pós-sol e pós-depilação. <br>
+       Hidrata profundamente sem entupir. <br> Não deixa filme gorduroso. <br> Estimula colagénio, previne estrias. </p>
+      <br>
+      <br>
+      <br>
+      <a class="icon-cocoa"></a>
+      <h5>Manteiga de Karité ( <i>Theobroma Cacao Seed Butter</i> )</h5>
+      <p class="descricao-propriedades">Forma um escudo que segura a água na pele por horas. 
+      Perfeita para pele extra-seca, calcanhares gretados, cotovelos, lábios e estrias antigas. <br> Antioxidante e 
+      anti-idade: Rica em polifenóis, combate radicais livres, melhora a firmeza e o tónus. <br>Dá aquele aspeto de pele nutrida. 
+      <br> Cicatrizante: Muito usada em cicatrizes, queimaduras leves e manchas escuras porque ajuda a uniformizar.
+      <br>Aroma natural: Cheira a chocolate, tem efeito de aromaterapia que acalma.</p>
+
+    </div>
+    
+  </div>
+
+  <div class="container">
+
+    <div class="page-header">
+      <h1>Os Nossos Sabões</h1>
+      <p>
+        Em cada um deles há em comum a palavra <b>óleo</b>
+      </p>
+    </div>
+
+    <div class="products-grid">
+      <div class="product-card" *ngFor="let soap of soaps()" [routerLink]="['/sabao', soap.id]">
+        <img [src]="soap.image" [alt]="soap.name">
+        <div class="content">
+          <h3>{{ soap.name }}</h3>
         </div>
+      </div>
+    </div>
 
-        <div class="products-grid">
-
-            <div class="product-card" *ngFor="let product of products">
-
-                <img [src]="product.image" [alt]="product.name">
-
-                <div class="content">
-                    <h3>{{ product.name }}</h3>
-                    <!-- <p>{{ product.description }}</p> -->
-
-                    <!-- <div class="bottom"> -->
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
+  </div>
 
 </section>

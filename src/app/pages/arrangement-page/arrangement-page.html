@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+
+<section class="arrangement-page">
+    <div class="container">
+        <div class="page-header">
+            <h1>Os Nossos Arranjos de Flores</h1>
+            <p>A beleza das flores que permanece, o aroma que encanta. Arranjos de flores de cera, feitos para perfumar e transformar cada espaço.</p>
+        </div>
+
+        <div class="products-grid">
+            <div class="product-card" *ngFor="let arrangement of arrangements()" [routerLink]="['/arranjo', arrangement.id]">
+                <img [src]="arrangement.image" [alt]="arrangement.name">
+
+                <div class="content">
+                    <h3>{{ arrangement.name }}</h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

@@ -1,0 +1,57 @@
+<app-navbar></app-navbar>
+<section class="product-detail-page" *ngIf="product() as p">
+  <div class="container">
+
+    <nav class="breadcrumb">
+      <a routerLink="/">Início</a> &gt;
+      <a [routerLink]="categoryRoute">{{ categoryLabel }}</a> &gt;
+      <span>{{ p.name }}</span>
+    </nav>
+
+    <div class="product-layout">
+
+      <div class="product-gallery">
+
+        <div class="thumbnails" *ngIf="gallery().length > 1">
+          <img
+            *ngFor="let img of gallery()"
+            [src]="img"
+            [alt]="p.name"
+            [class.active]="img === activeImage()"
+            (click)="selectImage(img)">
+        </div>
+
+        <div class="main-image">
+          <img [src]="activeImage()" [alt]="p.name">
+        </div>
+
+      </div>
+
+      <div class="product-info">
+        <h1>{{ p.name }}</h1>
+
+        <div class="info-block">
+          <h2>Sobre o produto</h2>
+          <p>{{ p.description }}</p>
+        </div>
+
+        <div class="info-block">
+          <h2>Tamanho</h2>
+          <p>{{ p.size }}</p>
+        </div>
+
+        <div class="info-block">
+          <h2>Composição</h2>
+          <p>{{ p.composition }}</p>
+        </div>
+
+        <div class="info-block">
+          <h2>Benefícios para a saúde</h2>
+          <p>{{ p.benefits }}</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>

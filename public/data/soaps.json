@@ -1,0 +1,54 @@
+[
+    {
+        "id": 1,
+        "name": "Sabonete de eucalipto",
+        "image": "eucalipto.png",
+        "images": ["eucaliptFT.png", "euca.jpeg"],
+        "description": "Sabonete 100% natural",
+        "size": "120g",
+        "composition":"",
+        "benefits":""
+    },
+    {
+        "id": 2,
+        "name": "Sabonete de Arruda e Sal Grosso",
+        "image": "arruda_sal_grosso.png",
+        "images": ["arr.png", "arruda.png"],
+        "description": "a",
+        "size": "120g",
+        "rotulagem INCI": "Olea europaea oil, cocos nucifera oil, helianthus annuus oil, aqua, sodium hydroxide, silk peptide powder, sodium chloride, rosa canina fruit oil, tocopherol, citric acid",
+        "composition": "Azeite extra virgem, óleo de coco, óleo de girassol bio , óleo essencial de arruda e sal do Himalaia. Elaborado pelo método a quente (hot process).", 
+        "benefits": "Cicatrizante e energético"
+    },
+    {
+        "id": 3,    
+        "name": "Sabonete de Aveia",
+        "image": "aveia.png",
+        "images": ["aveiaFT.png","aveiaa.jpeg"],
+        "description": "Sabonete 100% vegetal",
+        "size": "g",
+        "composition":"",
+        "benefits":"Hidratante e nutritivo, para peles secas"
+    },
+    {
+        "id": 4,
+        "name": "Sabonete de Curcuma",
+        "image": "curcuma_ft.png",
+        "images": ["curcuma_ft.png","curcumaFT.jpeg"],
+        "description": "Sabonete 100% vegetal",
+        "size": "g",
+        "composition":"",
+        "benefits":"Anti-inflamatório e anti-oxidante"
+    },
+    {
+        "id": 6,
+        "name": "Sabonete de Menta",
+        "image": "menta.png",
+        "images": ["menta.png","mentaFT.jpeg"],
+        "description": "Sabonete 100% vegetal",
+        "size": "g",
+        "composition":"",
+        "benefits":"Relaxamento mental e anti-oxidante."
+    }
+
+]

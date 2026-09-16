@@ -10,11 +10,11 @@
 
             <div class="products-grid">
 
-                <div class="product-card" *ngFor="let product of products">
-                    <img [src]="product.image" [alt]="product.name">
+                <div class="product-card" *ngFor="let candle of candles()" [routerLink]="['/vela', candle.id]">
+                    <img [src]="candle.image" [alt]="candle.name">
 
                     <div class="content">
-                        <h3>{{ product.name }}</h3>
+                        <h3>{{ candle.name }}</h3>
                     </div>
                 </div>
             </div>   

@@ -1,10 +1,10 @@
 @font-face {
-  font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?vl5nhu');
-  src:  url('fonts/icomoon.eot?vl5nhu#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?vl5nhu') format('truetype'),
-    url('fonts/icomoon.woff?vl5nhu') format('woff'),
-    url('fonts/icomoon.svg?vl5nhu#icomoon') format('svg');
+  font-family: 'sports-icons';
+  src:  url('fonts/sports-icons.eot?e3u71z');
+  src:  url('fonts/sports-icons.eot?e3u71z#iefix') format('embedded-opentype'),
+        url('fonts/sports-icons.ttf?e3u71z') format('truetype'),
+        url('fonts/sports-icons.woff?e3u71z') format('woff'),
+        url('fonts/sports-icons.svg?e3u71z#sports-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -12,7 +12,7 @@
 
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icomoon' !important;
+  font-family: 'sports-icons' !important;
   speak: never;
   font-style: normal;
   font-weight: normal;
@@ -36,4 +36,23 @@
 }
 .icon-instagram:before {
   content: "\ea92";
+}
+.icon-castor-bean:before {
+  content: "\e900";
+  width: 1rem;
+}
+.icon-coconut:before {
+  content: "\e901";
+}
+.icon-cocoa:before {
+  content: "\e902";
+}
+.icon-shea:before {
+  content: "\e903";
+}
+.icon-sunflower:before {
+  content: "\e904";
+}
+.icon-olives:before {
+  content: "\e905";
 }

@@ -22,10 +22,26 @@ export const routes: Routes = [
   },
 
   {
+    path: 'sabao/:id',
+    loadComponent: () =>
+      import('./pages/product-detail-component/product-detail-component')
+        .then(m => m.ProductDetailComponent),
+    data: { type: 'soap' }
+  }, 
+
+  {
     path: 'velas',
     loadComponent: () =>
       import('./pages/candle-page/candle-page')
         .then(m => m.CandlePage)
+  },
+
+  {
+    path: 'vela/:id',
+    loadComponent: () =>
+      import('./pages/product-detail-component/product-detail-component')
+        .then(m => m.ProductDetailComponent),
+    data: { type: 'candle' }
   },
 
   {
@@ -34,4 +50,20 @@ export const routes: Routes = [
       import('./pages/about-page/about-page')
         .then(m => m.AboutPage)
   },
+
+  {
+    path: 'arranjos',
+    loadComponent: () =>
+      import('./pages/arrangement-page/arrangement-page')
+        .then(m => m.ArrangementPage)
+  },
+
+  {
+    path: 'arranjo/:id',
+    loadComponent: () =>
+      import('./pages/product-detail-component/product-detail-component')
+        .then(m => m.ProductDetailComponent),
+    data: { type: 'arrangement' }
+  },
+
 ];

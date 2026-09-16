@@ -1,42 +1,52 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { NgFor } from '@angular/common';
-import { Navbar } from '../../core/components/navbar/navbar';
+// import { Navbar } from '../../core/components/navbar/navbar';
+import { RouterLink } from "@angular/router";
+import { SaboneteService, Sabonete } from '../../services/soap';
 
 @Component({
   selector: 'app-soap-page',
   standalone: true,
-  imports: [Navbar, NgFor],
+  imports: [NgFor, RouterLink],
   templateUrl: './soap-page.html',
-  styleUrls: ['./soap-page.scss'],
+  styleUrl: './soap-page.scss',
 })
-export class SoapPage {
+export class SoapPage implements OnInit {
 
-  products = [
-    {
-      name: 'Sabonete de Eucalipto',
-      // description: '', 
-      image: 'eucalipto.png'
-    },
-    {
-      name: 'Sabonete de arruda e sal grosso',
-      // description: 'Monitoriza a tua saúde e atividade.',
-      image: 'arruda_sal_grosso.png'
-    },
-    {
-      name: 'Sabonete de Aveia',
-      // description: '',
-      image: 'aveia.png'
-    },
-    {
-      name: 'Sabonete de Curcuma',
-      // description: '',
-      image: 'curcuma_ft.png'
-    },
-    {
-      name: 'Sabonete de limão e eucalipto',
-      // description: '',
-      image: 'limaoEucalipto.png'
-    }
-  ];
+  soaps = signal<Sabonete[]>([]);
 
+  constructor(
+    private saboneteService: SaboneteService
+  ) {}
+
+  ngOnInit(): void {
+
+    this.saboneteService.getSabonetes().subscribe({
+
+      next: (data) => {
+        console.log('Sabonetes recebidos:', data);
+
+        this.soaps.set(data);
+      },
+
+      error: (error) => {
+        console.error(
+          'Erro ao carregar os sabonetes:',
+          error
+        );
+      }
+
+    });
+
+  }
+
+    menuOpen = signal(false);
+
+  toggleMenu() {
+    this.menuOpen.update(v => !v);
+  }
+
+  closeMenu() {
+    this.menuOpen.set(false);
+  }
 }
