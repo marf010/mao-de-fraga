@@ -1,12 +1,5 @@
 require('dotenv').config();
 
-console.log('ENV:', {
-  adminName: process.env.ADMIN_NAME,
-  hashLength: process.env.ADMIN_PASSWORD_HASH?.length,
-  hashStart: process.env.ADMIN_PASSWORD_HASH?.slice(0, 7),
-  hasJwtSecret: !!process.env.JWT_SECRET
-});
-
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
@@ -40,12 +33,32 @@ app.use(express.urlencoded({
 // CAMINHO PARA OS DADOS
 // =====================================================
 
-const dataPath = path.join(
-    __dirname,
-    '..',
-    'public',
-    'data'
-);
+
+const sourceDataPath = path.join(__dirname, '..', 'public', 'data');
+const dataPath = process.env.DATA_DIR || sourceDataPath;
+
+if (process.env.DATA_DIR) {
+  fs.mkdirSync(dataPath, { recursive: true });
+
+  const files = ['soaps.json', 'candles.json', 'arranjos.json'];
+
+  for (const file of files) {
+    const destination = path.join(dataPath, file);
+    const original = path.join(sourceDataPath, file);
+
+    if (!fs.existsSync(destination)) {
+      if (!fs.existsSync(original)) {
+        throw new Error(`Ficheiro JSON original não encontrado: ${original}`);
+      }
+
+      fs.copyFileSync(original, destination);
+      console.log(`Dados iniciais copiados: ${file}`);
+    }
+  }
+}
+
+console.log('Pasta dos dados:', dataPath);
+
 
 console.log(
     'PASTA DOS DADOS:',
