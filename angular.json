@@ -35,7 +35,7 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "/maos-de-fraga/",
+              "baseHref": "/mao-de-fraga/",
               "budgets": [
                 {
                   "type": "initial",
