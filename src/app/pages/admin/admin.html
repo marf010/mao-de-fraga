@@ -1,0 +1,108 @@
+<div class="admin-page">
+
+  <!-- ===================================================== -->
+  <!-- SIDEBAR -->
+  <!-- ===================================================== -->
+  <aside class="sidebar">
+
+    <a class="brand" routerLink="/admin" aria-label="Ir para o painel">
+      <img class="brand-logo" src="logotipo.png" alt="Mãos de Fraga">
+    </a>
+
+    <nav class="menu" aria-label="Menu de administração">
+
+      <a routerLink="/admin" routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact: true }">
+        <span class="menu-icon">⌂</span>
+        <span>Painel</span>
+      </a>
+
+      @for (category of categories; track category.path) {
+        <a [routerLink]="category.path" routerLinkActive="active">
+          <span class="menu-icon">{{ category.icon }}</span>
+          <span>{{ category.name }}</span>
+        </a>
+      }
+
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button type="button" (click)="logout()">
+        <span>↪</span>
+        <span>Sair</span>
+      </button>
+    </div>
+
+  </aside>
+
+
+  <!-- ===================================================== -->
+  <!-- ÁREA PRINCIPAL -->
+  <!-- ===================================================== -->
+  <main class="main-content">
+
+    <header class="top-header">
+
+      <span class="header-label">Área de administração</span>
+
+      <div class="header-right">
+        <div class="user-info">
+          <strong>Administrador</strong>
+          <span>Gestão da loja</span>
+        </div>
+
+        <!-- Só aparece no telemóvel (a sidebar esconde o "Sair") -->
+        <button type="button" class="header-logout" (click)="logout()">
+          ↪ Sair
+        </button>
+      </div>
+
+    </header>
+
+
+    <section class="dashboard">
+
+      <!-- BOAS-VINDAS -->
+      <div class="welcome">
+        <span class="eyebrow">VISÃO GERAL</span>
+        <h1>Painel de administração</h1>
+        <p>Gere os produtos da Mãos de Fraga de forma simples.</p>
+      </div>
+
+      <!-- CATEGORIAS -->
+      <div class="section-header">
+        <span class="eyebrow">CATÁLOGO</span>
+        <h2>O que queres gerir?</h2>
+      </div>
+
+      <div class="cards">
+
+        @for (category of categories; track category.path) {
+
+          <a [routerLink]="category.path" class="product-card">
+
+            <div [class]="'card-top ' + category.tone">
+              <span class="category-icon">{{ category.icon }}</span>
+            </div>
+
+            <div class="card-content">
+              <h3>{{ category.name }}</h3>
+              <p>{{ category.description }}</p>
+
+              <span class="card-link">
+                {{ category.action }}
+                <span class="arrow">→</span>
+              </span>
+            </div>
+
+          </a>
+
+        }
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>

@@ -1,11 +1,24 @@
-// @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Montserrat:wght@300;400;500;600&display=swap');
 
-$primary: #2563eb;
-$background: #f5f7fa;
-$text: #1e293b;
-$gray: #64748b;
-$white: #fff;
+// ================= PALETA (inspirada na floresta do vídeo) =================
+$forest-900: #141c15;   // verde quase preto (menu mobile, overlays)
+$forest-700: #2d4a35;   // verde floresta profundo
+$forest-500: #4a7556;   // verde musgo (cor principal)
+$sage-300:   #a9c3a0;   // verde salva (detalhes, hovers)
+$sage-100:   #e6eddf;   // verde muito claro
+$cream:      #f4f1e6;   // creme natural (fundo da página)
+$paper:      #fcfbf6;   // papel (cartões)
+$earth:      #8a6a3d;   // castanho terra (acentos pontuais)
+$text:       #1f2a22;
+$gray:       #5f6b62;
+$white:      #fff;
+
+$serif: 'EB Garamond', serif;
+$sans:  'Montserrat', 'Segoe UI', sans-serif;
+
+$radius: 18px;
+$shadow-soft: 0 10px 30px rgba($forest-900, .10);
+$shadow-hover: 0 18px 40px rgba($forest-900, .18);
 
 /* ================= NAVBAR ================= */
 
@@ -21,7 +34,8 @@ $white: #fff;
     justify-content: space-between;
     align-items: center;
     padding: 0 80px;
-    background: transparent;
+    // degradé subtil para o texto ler-se bem sobre o vídeo
+    background: linear-gradient(to bottom, rgba($forest-900, .55), transparent);
     position: absolute;
     top: 0;
     left: 0;
@@ -39,17 +53,36 @@ nav {
 
 nav a {
     text-decoration: none;
-    color: #fff;
-    font-family: "Segoe UI", sans-serif;
+    color: $white;
+    font-family: $sans;
+    font-size: .85rem;
     font-weight: 500;
-    transition: .3s;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    transition: color .3s ease;
     position: relative;
-    text-shadow: 0 2px 10px rgba(0,0,0,.5);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, .5);
     white-space: nowrap;
-}
 
-nav a:hover {
-    color: #d8e8d2;
+    // sublinhado que cresce ao passar o rato
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -8px;
+        width: 0;
+        height: 2px;
+        background: $sage-300;
+        transition: width .3s ease;
+    }
+
+    &:hover {
+        color: $sage-100;
+
+        &::after {
+            width: 100%;
+        }
+    }
 }
 
 .active::after {
@@ -59,7 +92,7 @@ nav a:hover {
     bottom: -8px;
     width: 100%;
     height: 2px;
-    background: #fff;
+    background: $sage-300;
 }
 
 /* ================= HAMBÚRGUER (escondido em desktop) ================= */
@@ -80,10 +113,10 @@ nav a:hover {
         display: block;
         width: 100%;
         height: 3px;
-        background: #fff;
+        background: $white;
         border-radius: 2px;
         transition: .3s ease;
-        box-shadow: 0 1px 4px rgba(0,0,0,.4);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, .4);
     }
 
     &.open {
@@ -104,7 +137,8 @@ nav a:hover {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,.5);
+    background: rgba($forest-900, .6);
+    backdrop-filter: blur(3px);
     opacity: 0;
     pointer-events: none;
     transition: opacity .3s ease;
@@ -116,7 +150,7 @@ nav a:hover {
     }
 }
 
-/* ================= RESPONSIVO ================= */
+/* ================= RESPONSIVO (NAVBAR) ================= */
 
 @media (max-width: 1024px) {
 
@@ -137,7 +171,7 @@ nav a:hover {
     }
 
     nav a {
-        font-size: .95rem;
+        font-size: .8rem;
     }
 }
 
@@ -163,7 +197,8 @@ nav a:hover {
         width: 260px;
         max-width: 80vw; // nunca ultrapassa 80% do ecrã, mesmo em telemóveis muito pequenos
         height: 100vh;
-        background: rgba(20, 25, 20, 0.97);
+        background: rgba($forest-900, .97);
+        border-left: 1px solid rgba($sage-300, .25);
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -177,7 +212,7 @@ nav a:hover {
         }
 
         a {
-            font-size: 1.1rem;
+            font-size: 1rem;
             text-shadow: none;
         }
     }
@@ -188,7 +223,7 @@ nav a:hover {
         width: 220px;
 
         a {
-            font-size: 1rem;
+            font-size: .9rem;
         }
     }
 }
@@ -196,10 +231,16 @@ nav a:hover {
 /* ================= PAGE ================= */
 
 .soap-page {
-    background: $background;
+    // creme com um toque de verde, em vez do amarelo anterior
+    background:
+        radial-gradient(circle at 15% 0%, rgba($sage-300, .35), transparent 45%),
+        radial-gradient(circle at 90% 100%, rgba($sage-300, .25), transparent 40%),
+        $cream;
     min-height: 100vh;
     max-width: 100vw;
     overflow-x: hidden;
+    color: $text;
+    font-family: $sans;
 }
 
 .container {
@@ -210,122 +251,200 @@ nav a:hover {
 /* ================= VIDEO ================= */
 
 .video-container {
-  position: relative;
-  width: 100%;
-  max-width: 100vw;
-  height: 500vh;
-  min-height: 500px;
-  overflow: hidden;
-  z-index: 0;
+    position: relative;
+    width: 100%;
+    max-width: 100vw;
+    height: auto;        // cresce conforme o texto: já não corta nada
+    min-height: 100vh;
+    overflow: hidden;
+    z-index: 0;
+
+    // película verde-escura por cima do vídeo: melhora a leitura do texto
+    // e funde o fim do vídeo com o fundo creme da página
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background:
+            linear-gradient(to bottom,
+                rgba($forest-900, .45) 0%,
+                rgba($forest-900, .15) 25%,
+                rgba($forest-900, .15) 85%,
+                rgba($forest-900, .55) 100%);
+    }
 }
 
 .video-bg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
-  z-index: 0;
+    // o vídeo preenche o contentor todo, do início ao fim do texto
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
 }
 
 .conteudo {
-  position: relative;
-  z-index: 1;
-  color: white;
-  text-align: center;
-  padding: 100px 20px;
-  font-size: 3rem;
-  margin-top: 7rem;
-  opacity: 50%;
-  font-family: 'EB Garamond', serif;
+    position: relative;
+    z-index: 1;
+    color: $white;
+    text-align: center;
+    padding: 100px 20px;
+    font-size: 3rem;
+    margin-top: 7rem;
+    opacity: .85;
+    font-family: $serif;
+    font-weight: 500;
+    letter-spacing: .02em;
+    line-height: 1.2;
+    text-shadow: 0 4px 25px rgba($forest-900, .7);
 }
 
-.propriedades{
-  position: relative;
-  z-index: 1;
-  color: white;
-  text-align: center;
-  padding: 100px 20px;
-  font-size: 1.7rem;
-  margin-bottom: 2rem;
-  opacity: 90%;
-  font-family: 'EB Garamond', serif;
+.propriedades {
+    position: relative;
+    z-index: 1;
+    color: $white;
+    text-align: center;
+    padding: 120px 20px 160px;
+    font-size: 1.7rem;
+    margin-bottom: 2rem;
+    opacity: .95;
+    font-family: $serif;
+    line-height: 1.5;
+    text-shadow: 0 3px 20px rgba($forest-900, .75);
+
+    // cada ícone ocupa a sua própria linha
+    a[class^="icon-"] {
+        display: block;
+    }
+
+    h2,
+    h3,
+    h5 {
+        font-size: 1.9rem;
+        font-weight: 600;
+        margin: .4rem 0 1rem;
+        // pequeno traço decorativo em verde salva
+        &::after {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 2px;
+            margin: 14px auto 0;
+            background: $sage-300;
+            border-radius: 2px;
+        }
+    }
 }
 
-.descricao-propriedades{
-    font-size:smaller ;
+.descricao-propriedades {
+    font-size: smaller;
+    font-family: $sans;
+    font-weight: 300;
+    letter-spacing: .03em;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    max-width: 62ch; // largura confortável para os textos mais longos (rícino, karité)
+    margin: 0 auto;
 }
 
-.icon-olives:before {
-  font-size: 10rem;
-}
-
-.icon-coconut:before {
-  font-size: 10rem;
-}
-
-.icon-sunflower:before {
-  font-size: 10rem;
-}
-
-.icon-castor-bean:before{
+// ícones das matérias-primas: cor salva para combinar com a floresta
+.icon-olives:before,
+.icon-coconut:before,
+.icon-sunflower:before,
+.icon-castor-bean:before,
+.icon-cocoa:before,
+.icon-shea:before {
     font-size: 10rem;
-}
-
-.icon-cocoa:before{
-    font-size: 10rem;
-}
-
-.icon-shea:before{
-    font-size: 10rem;
+    color: $sage-300;
+    filter: drop-shadow(0 6px 14px rgba($forest-900, .5));
 }
 
 @media (max-width: 768px) {
-  .video-container {
-    height: 70vh;
-  }
-
-  .conteudo {
-    padding: 60px 15px;
-
-    h1 {
-      font-size: 1.6rem;
+    .video-container {
+        min-height: 100vh; // continua a crescer com o texto
     }
-  }
+
+    .propriedades {
+        padding: 80px 20px 120px;
+        font-size: 1.3rem;
+
+        h5 {
+            font-size: 1.5rem;
+        }
+    }
+
+    .descricao-propriedades {
+        font-size: .95rem;
+        line-height: 1.7;
+    }
+
+    .conteudo {
+        padding: 60px 15px;
+
+        h1 {
+            font-size: 1.6rem;
+        }
+    }
+
+    .icon-olives:before,
+    .icon-coconut:before,
+    .icon-sunflower:before,
+    .icon-castor-bean:before,
+    .icon-cocoa:before,
+    .icon-shea:before {
+        font-size: 7rem;
+    }
 }
 
 /* ================= PAGE HEADER ================= */
 
 .page-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin: 70px 0 40px;
 
     h1 {
-        font-family: 'EB Garamond', serif;
-        font-size: 2.5rem;
-        margin-bottom: 10px;
-        color: $text;
+        font-family: $serif;
+        font-size: 2.8rem;
+        font-weight: 600;
+        margin-bottom: 14px;
+        color: $forest-700;
+        letter-spacing: .01em;
+
+        // folha/traço decorativo por baixo do título
+        &::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            margin: 14px auto 0;
+            background: linear-gradient(90deg, $sage-300, $forest-500);
+            border-radius: 3px;
+        }
     }
 
     p {
         color: $gray;
+        font-family: $sans;
         font-size: 1rem;
+        max-width: 60ch;
+        margin: 0 auto;
+        line-height: 1.7;
     }
 }
 
 @media (max-width: 768px) {
     .page-header h1 {
-        font-size: 2rem;
+        font-size: 2.1rem;
     }
 }
 
 @media (max-width: 480px) {
     .page-header h1 {
-        font-size: 1.6rem;
+        font-size: 1.7rem;
     }
 
     .page-header p {
@@ -339,7 +458,8 @@ nav a:hover {
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
+    gap: 28px;
+    padding-bottom: 80px;
 }
 
 @media (max-width: 480px) {
@@ -350,23 +470,47 @@ nav a:hover {
 }
 
 .product-card {
-    background: $white;
-    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    background: $sage-100;
+    border: 1px solid rgba($forest-500, .12);
+    border-radius: $radius;
     width: 100%;
-    height: 390px;
+    min-height: 390px; // antes era altura fixa: agora cresce se o texto for maior
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0,0,0,.08);
-    transition: .3s;
+    box-shadow: $shadow-soft;
+    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    cursor: pointer;
+    user-select: none;
 
+    // Efeito ao passar o rato
     &:hover {
         transform: translateY(-6px);
-        box-shadow: 0 15px 35px rgba(0,0,0,.12);
+        box-shadow: $shadow-hover;
+        border-color: rgba($forest-500, .35);
+    }
+
+    // Efeito ao clicar
+    &:active {
+        transform: translateY(-2px) scale(.98);
+        box-shadow: 0 6px 15px rgba($forest-900, .12);
+        transition: transform .1s ease;
     }
 
     img {
         width: 100%;
         height: 280px;
         object-fit: contain;
+        padding: 18px;
+        box-sizing: border-box;
+        // fundo verde claríssimo atrás do sabão, dá profundidade à foto
+        background: radial-gradient(circle at 50% 40%, $white 0%, #fff 100%);
+        transition: transform .4s ease;
+    }
+
+    // Pequeno zoom na imagem ao passar o rato
+    &:hover img {
+        transform: scale(1.04);
     }
 
     .content {
@@ -375,30 +519,37 @@ nav a:hover {
         align-items: center;
         text-align: center;
         padding: 20px;
+        flex: 1;
 
         h3 {
-            font-family: "Montserrat", sans-serif;
-            font-size: 1rem;
-            margin-bottom: 10px;
-            color: $text;
+            font-family: $serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: $forest-700;
         }
 
         p {
-            font-family: "Montserrat", sans-serif;
-            color: $text;
-            font-size: .90rem;
+            font-family: $sans;
+            color: $gray;
+            font-size: .88rem;
             margin-bottom: 20px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .bottom {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
+            margin-top: auto; // empurra o preço para o fundo do cartão
+            padding-top: 14px;
+            border-top: 1px solid rgba($forest-500, .15);
 
             .price {
-                color: $primary;
-                font-size: 1.4rem;
+                font-family: $serif;
+                color: $forest-500;
+                font-size: 1.5rem;
                 font-weight: 700;
             }
         }
@@ -407,10 +558,19 @@ nav a:hover {
 
 @media (max-width: 480px) {
     .product-card {
-        height: 340px;
+        min-height: 340px;
 
         img {
             height: 230px;
         }
+    }
+}
+
+/* ================= ACESSIBILIDADE ================= */
+
+// quem prefere menos movimento não vê as animações
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
     }
 }

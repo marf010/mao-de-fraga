@@ -1,0 +1,99 @@
+<div class="login-page">
+
+  <div class="login-card">
+
+
+    <h1>Mãos de Fraga</h1>
+
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="login()"
+    >
+
+      <!-- NOME -->
+
+      <div class="form-group">
+
+        <label for="name">
+          Nome
+        </label>
+
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="Nome do administrador"
+          autocomplete="username"
+        >
+
+        @if (
+          loginForm.controls.name.touched &&
+          loginForm.controls.name.invalid
+        ) {
+          <small class="error">
+            Introduza o nome.
+          </small>
+        }
+
+      </div>
+
+
+      <!-- PASSWORD -->
+
+      <div class="form-group">
+
+        <label for="password">
+          Password
+        </label>
+
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          placeholder="Introduza a sua password"
+          autocomplete="current-password"
+        >
+
+        @if (
+          loginForm.controls.password.touched &&
+          loginForm.controls.password.invalid
+        ) {
+          <small class="error">
+            Introduza a password.
+          </small>
+        }
+
+      </div>
+
+
+      <!-- ERRO DO LOGIN -->
+
+      @if (errorMessage) {
+
+        <div class="login-error">
+          {{ errorMessage }}
+        </div>
+
+      }
+
+
+      <!-- BOTÃO -->
+
+      <button
+        type="submit"
+        [disabled]="loginForm.invalid || loading"
+      >
+
+        @if (loading) {
+          A entrar...
+        } @else {
+          Entrar
+        }
+
+      </button>
+
+    </form>
+
+  </div>
+
+</div>

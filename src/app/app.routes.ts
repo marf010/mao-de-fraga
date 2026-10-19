@@ -1,11 +1,21 @@
 import { Routes } from '@angular/router';
+import { adminGuard } from './guards/admin-guards';
 
 export const routes: Routes = [
+
+  // =====================================================
+  // PÁGINA INICIAL
+  // =====================================================
+
   {
     path: '',
     redirectTo: 'inicio',
     pathMatch: 'full'
   },
+
+  // =====================================================
+  // PÚBLICO
+  // =====================================================
 
   {
     path: 'inicio',
@@ -26,8 +36,10 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/product-detail-component/product-detail-component')
         .then(m => m.ProductDetailComponent),
-    data: { type: 'soap' }
-  }, 
+    data: {
+      type: 'soap'
+    }
+  },
 
   {
     path: 'velas',
@@ -41,7 +53,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/product-detail-component/product-detail-component')
         .then(m => m.ProductDetailComponent),
-    data: { type: 'candle' }
+    data: {
+      type: 'candle'
+    }
   },
 
   {
@@ -63,7 +77,65 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/product-detail-component/product-detail-component')
         .then(m => m.ProductDetailComponent),
-    data: { type: 'arrangement' }
+    data: {
+      type: 'arrangement'
+    }
   },
+
+  // =====================================================
+  // LOGIN DO ADMIN
+  // =====================================================
+
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./pages/admin-login/admin-login')
+        .then(m => m.AdminLoginComponent)
+  },
+
+  // =====================================================
+  // ÁREA ADMIN
+  // =====================================================
+
+  {
+    path: 'admin',
+    canActivate: [adminGuard],
+
+    children: [
+
+      // /admin
+      {
+        path: '',
+        loadComponent: () =>
+          import('./pages/admin/admin')
+            .then(m => m.AdminComponent)
+      },
+
+      // /admin/soaps
+      {
+        path: 'soaps',
+        loadComponent: () =>
+          import('./pages/admin-soaps/admin-soaps')
+            .then(m => m.AdminSoapsComponent)
+      },
+
+      // /admin/candles
+      {
+        path: 'candles',
+        loadComponent: () =>
+          import('./pages/admin-candles/admin-candles')
+            .then(m => m.AdminCandlesComponent)
+      },
+
+      // /admin/arrangements
+      {
+        path: 'arrangements',
+        loadComponent: () =>
+          import('./pages/admin-arrangements/admin-arrangements')
+            .then(m => m.AdminArrangementsComponent)
+      }
+
+    ]
+  }
 
 ];

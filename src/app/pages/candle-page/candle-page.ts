@@ -1,13 +1,12 @@
-import { Component, OnInit, ChangeDetectorRef, signal } from '@angular/core';
+import { Component, HostListener, OnInit, signal } from '@angular/core';
 import { NgFor } from '@angular/common';
-import { Navbar } from '../../core/components/navbar/navbar';
-import { RouterLink } from "@angular/router";
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CandleService, Vela } from '../../services/candle';
 
 @Component({
   selector: 'app-candle-page',
   standalone: true,
-  imports: [Navbar, NgFor, RouterLink],
+  imports: [NgFor, RouterLink, RouterLinkActive],
   templateUrl: './candle-page.html',
   styleUrl: './candle-page.scss',
 })
@@ -15,9 +14,11 @@ export class CandlePage implements OnInit {
 
   candles = signal<Vela[]>([]);
 
+  // Estado do menu hambúrguer (mobile)
+  menuOpen = signal(false);
+
   constructor(
-    private velaService: CandleService,
-    // private cdr: ChangeDetectorRef
+    private velaService: CandleService
   ) {}
 
   ngOnInit(): void {
@@ -25,11 +26,7 @@ export class CandlePage implements OnInit {
     this.velaService.getVelas().subscribe({
 
       next: (data) => {
-        console.log('Velas recebidas:', data);
-
         this.candles.set(data);
-
-        // this.cdr.detectChanges();
       },
 
       error: (error) => {
@@ -41,5 +38,19 @@ export class CandlePage implements OnInit {
 
     });
 
+  }
+
+  toggleMenu(): void {
+    this.menuOpen.update(v => !v);
+  }
+
+  closeMenu(): void {
+    this.menuOpen.set(false);
+  }
+
+  // Tecla Esc fecha o menu
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    this.closeMenu();
   }
 }

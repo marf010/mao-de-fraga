@@ -1,7 +1,537 @@
-@import '../soap-page/soap-page.scss';
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Montserrat:wght@300;400;500;600&display=swap');
 
-.candle-page{
-    background-color: $background;
+// ================= PALETA (luz de vela) =================
+$ember-900: #1b130e;   // castanho quase preto (hero, menu mobile)
+$wax-800:   #2d1f16;   // castanho escuro quente
+$terracotta:#a4573a;   // acento terroso
+$amber-500: #d9a03f;   // âmbar (cor principal)
+$amber-300: #f0c978;   // chama clara
+$cream:     #f6efe2;   // creme (fundo)
+$paper:     #fcf8f0;   // papel (cartões)
+$text:      #2a1d15;
+$gray:      #6f6256;
+
+$serif: 'EB Garamond', serif;
+$sans:  'Montserrat', 'Segoe UI', sans-serif;
+
+$radius: 18px;
+$shadow-soft:  0 10px 30px rgba($ember-900, .10);
+$shadow-hover: 0 20px 45px rgba($ember-900, .20), 0 0 40px rgba($amber-500, .18);
+
+/* ================= NAVBAR ================= */
+// Sem fundo próprio: a faixa escura do .candle-page::before
+// dá o contraste para o texto branco se ler bem.
+
+.navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100vw;
+    height: 120px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 80px;
+    box-sizing: border-box;
+    z-index: 1000;
+
+    .logo img {
+        display: block;
+        width: 12rem;
+        height: auto;
+        margin-top: 3rem;
+        filter: drop-shadow(0 2px 10px rgba(0, 0, 0, .4));
+    }
+}
+
+nav {
+    display: flex;
+    gap: 64px;
+
+    a {
+        position: relative;
+        text-decoration: none;
+        color: $paper;
+        font-family: $sans;
+        font-size: .85rem;
+        font-weight: 500;
+        letter-spacing: .14em;
+        white-space: nowrap;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, .5);
+        transition: color .3s ease;
+
+        // sublinhado âmbar que cresce ao passar o rato
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 0;
+            height: 2px;
+            background: $amber-300;
+            transition: width .3s ease;
+        }
+
+        &:hover {
+            color: $amber-300;
+
+            &::after {
+                width: 100%;
+            }
+        }
+
+        // página atual (routerLinkActive="active")
+        &.active::after {
+            width: 100%;
+        }
+
+        &:focus-visible {
+            outline: 2px solid $amber-300;
+            outline-offset: 6px;
+        }
+    }
+}
+
+/* ================= HAMBÚRGUER (escondido em desktop) ================= */
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 22px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+    padding: 0;
+
+    span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background: $paper;
+        border-radius: 2px;
+        transition: .3s ease;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, .4);
+    }
+
+    &.open {
+        span:nth-child(1) {
+            transform: translateY(9.5px) rotate(45deg);
+        }
+        span:nth-child(2) {
+            opacity: 0;
+        }
+        span:nth-child(3) {
+            transform: translateY(-9.5px) rotate(-45deg);
+        }
+    }
+
+    &:focus-visible {
+        outline: 2px solid $amber-300;
+        outline-offset: 6px;
+    }
+}
+
+/* overlay escuro atrás do menu mobile */
+.menu-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba($ember-900, .6);
+    backdrop-filter: blur(3px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+    z-index: 900;
+
+    &.visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+/* ================= FOLHA DECORATIVA (opcional) ================= */
+// Só aparece se descomentares o bloco no HTML.
+// Posiciona-se em relação ao .candle-page.
+
+.leaf-container {
+    position: absolute;
+    top: 110px;
+    right: 4%;
+    z-index: 1;
+    pointer-events: none;
+
+    .leaf {
+        display: block;
+        width: 200px;
+        height: auto;
+        opacity: .5;
+        transform-origin: 50% 0;
+        animation: sway 7s ease-in-out infinite;
+        filter: drop-shadow(0 8px 20px rgba(0, 0, 0, .35));
+    }
+}
+
+@keyframes sway {
+    0%, 100% { transform: rotate(-2deg); }
+    50%      { transform: rotate(3deg); }
+}
+
+/* ================= PAGE ================= */
+
+.candle-page {
+    position: relative;
     min-height: 100vh;
-    padding: 40px;
+    max-width: 100vw;
+    overflow-x: hidden;
+    font-family: $sans;
+    color: $text;
+    background:
+        radial-gradient(circle at 85% 70%, rgba($amber-300, .25), transparent 45%),
+        radial-gradient(circle at 10% 90%, rgba($terracotta, .08), transparent 40%),
+        $cream;
+
+    // Faixa escura no topo: a navbar tem texto branco e é transparente,
+    // por isso precisa de um fundo escuro por baixo para se ler bem.
+    // O brilho central imita a luz de uma vela.
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 480px;
+        z-index: 0;
+        pointer-events: none;
+        background:
+            radial-gradient(ellipse 55% 70% at 50% 35%, rgba($amber-500, .38), transparent 70%),
+            linear-gradient(to bottom, $ember-900 0%, $wax-800 65%, rgba($cream, 0) 100%);
+    }
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    width: min(1500px, 90%);
+    margin: auto;
+    padding-bottom: 90px;
+}
+
+/* ================= PAGE HEADER ================= */
+
+.page-header {
+    text-align: center;
+    padding: 190px 0 70px; // 190px para ficar abaixo da navbar (120px)
+
+    // pequena chama decorativa por cima do título
+    h1::before {
+        content: "";
+        display: block;
+        width: 14px;
+        height: 28px;
+        margin: 0 auto 18px;
+        border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+        background: radial-gradient(circle at 50% 70%, #fff6dc 0%, $amber-300 45%, $amber-500 100%);
+        box-shadow: 0 0 18px 6px rgba($amber-300, .55), 0 0 50px 16px rgba($amber-500, .3);
+        transform-origin: 50% 100%;
+        animation: flame 3s ease-in-out infinite;
+    }
+
+    h1 {
+        font-family: $serif;
+        font-size: 3rem;
+        font-weight: 500;
+        letter-spacing: .02em;
+        margin-bottom: 14px;
+        color: $paper;
+        text-shadow: 0 4px 25px rgba(0, 0, 0, .4);
+    }
+
+    p {
+        font-family: $sans;
+        font-size: 1rem;
+        font-weight: 300;
+        letter-spacing: .04em;
+        line-height: 1.7;
+        max-width: 55ch;
+        margin: 0 auto;
+        color: rgba($paper, .8);
+    }
+}
+
+@keyframes flame {
+    0%, 100% { transform: scale(1) rotate(-1deg); }
+    25%      { transform: scale(1.06, .96) rotate(1.5deg); }
+    50%      { transform: scale(.96, 1.06) rotate(-1deg); }
+    75%      { transform: scale(1.04, .98) rotate(1deg); }
+}
+
+/* ================= PRODUCTS GRID ================= */
+// Mesmo formato dos cartões da página dos sabões:
+// imagem "contain" em fundo branco (280px), texto por baixo, altura mínima 390px.
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    background: #f7ecd6;
+    border: 1px solid rgba($amber-500, .15);
+    border-radius: $radius;
+    width: 100%;
+    min-height: 390px;
+    overflow: hidden;
+    box-shadow: $shadow-soft;
+    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    cursor: pointer;
+    user-select: none;
+
+    // Efeito ao passar o rato
+    &:hover {
+        transform: translateY(-6px);
+        box-shadow: $shadow-hover;
+        border-color: rgba($amber-500, .4);
+    }
+
+    // Efeito ao clicar
+    &:active {
+        transform: translateY(-2px) scale(.98);
+        box-shadow: 0 6px 15px rgba($ember-900, .12);
+        transition: transform .1s ease;
+    }
+
+    &:focus-visible {
+        outline: 2px solid $terracotta;
+        outline-offset: 4px;
+    }
+
+    img {
+        width: 100%;
+        height: 280px;
+        object-fit: contain;
+        padding: 18px;
+        box-sizing: border-box;
+        background: #fff;
+        transition: transform .4s ease;
+    }
+
+    // Pequeno zoom na imagem ao passar o rato
+    &:hover img {
+        transform: scale(1.04);
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        flex: 1;
+
+        h3 {
+            font-family: $serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: $wax-800;
+        }
+
+        p {
+            font-family: $sans;
+            color: $gray;
+            font-size: .88rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: auto;
+            padding-top: 14px;
+            border-top: 1px solid rgba($amber-500, .2);
+
+            .price {
+                font-family: $serif;
+                color: $terracotta;
+                font-size: 1.5rem;
+                font-weight: 700;
+            }
+        }
+    }
+}
+
+/* ================= RESPONSIVO ================= */
+
+@media (max-width: 1024px) {
+
+    .navbar {
+        height: 90px;
+        padding: 0 40px;
+
+        .logo img {
+            width: 8rem;
+            margin-top: 0;
+        }
+    }
+
+    nav {
+        gap: 32px;
+
+        a { font-size: .75rem; }
+    }
+
+    .leaf-container .leaf {
+        width: 150px;
+    }
+
+    .candle-page::before {
+        height: 420px;
+    }
+
+    .page-header {
+        padding: 150px 0 55px;
+
+        h1 { font-size: 2.6rem; }
+    }
+}
+
+// ---------- Mobile: menu hambúrguer ----------
+
+@media (max-width: 768px) {
+
+    .navbar {
+        height: 70px;
+        padding: 0 20px;
+
+        .logo img {
+            width: 6rem;
+        }
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .menu-overlay {
+        display: block;
+    }
+
+    // painel lateral que desliza da direita
+    nav {
+        position: fixed;
+        top: 0;
+        right: -280px;
+        width: 260px;
+        max-width: 80vw; // nunca ultrapassa 80% do ecrã
+        height: 100vh;
+        box-sizing: border-box;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 32px;
+        background: rgba($ember-900, .97);
+        border-left: 1px solid rgba($amber-300, .25);
+        z-index: 1000;
+
+        // fechado: fora do alcance do teclado e de leitores de ecrã
+        visibility: hidden;
+        transition: right .35s ease, visibility 0s linear .35s;
+
+        &.open {
+            right: 0;
+            visibility: visible;
+            transition: right .35s ease, visibility 0s;
+        }
+
+        a {
+            font-size: 1rem;
+            text-shadow: none;
+        }
+    }
+
+    .leaf-container {
+        top: 90px;
+
+        .leaf {
+            width: 110px;
+            opacity: .35;
+        }
+    }
+
+    // sem a linha de links por baixo do logótipo, precisa de menos espaço
+    .candle-page::before {
+        height: 380px;
+    }
+
+    .page-header {
+        padding: 140px 0 45px;
+
+        h1 { font-size: 2.1rem; }
+    }
+}
+
+@media (max-width: 480px) {
+
+    nav {
+        width: 220px;
+
+        a {
+            font-size: .9rem;
+        }
+    }
+
+    .leaf-container {
+        display: none; // em ecrãs muito pequenos a folha só atrapalhava
+    }
+
+    .page-header {
+        padding: 130px 0 35px;
+
+        h1 { font-size: 1.8rem; }
+
+        p {
+            font-size: .9rem;
+            padding: 0 10px;
+        }
+    }
+
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .product-card {
+        min-height: 340px;
+
+        img {
+            height: 230px;
+        }
+    }
+}
+
+/* ================= ACESSIBILIDADE ================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .page-header h1::before,
+    .leaf-container .leaf {
+        animation: none;
+    }
+
+    .product-card,
+    .hamburger span,
+    .menu-overlay,
+    nav,
+    nav a::after {
+        transition: none;
+    }
 }

@@ -1,0 +1,2 @@
+import {k as p,h as hv,T}from'./main-OE4I6U3Z.js';var n=class i{http=p(hv);apiUrl="http://localhost:3000/api";getProducts(t){return this.http.get(`${this.apiUrl}/${t}`)}addProduct(t,r){return this.http.post(`${this.apiUrl}/${t}`,r)}updateProduct(t,r,a){return this.http.put(`${this.apiUrl}/${t}/${r}`,a)}deleteProduct(t,r){return this.http.delete(`${this.apiUrl}/${t}/${r}`)}static \u0275fac=function(r){return new(r||i)};static \u0275prov=T({token:i,factory:i.\u0275fac,providedIn:"root"})};
+export{n};

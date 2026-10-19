@@ -1,138 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Montserrat:wght@300;400;500;600&display=swap');
+
+$serif: 'EB Garamond', serif;
+$sans:  'Montserrat', 'Segoe UI', sans-serif;
+
+$radius: 18px;
+
 .product-detail-page {
-  padding: 60px 0 80px;
-  min-height: 60vh;
-  font-family: 'Inter', sans-serif;
+  // ===== Cores do tema (verde dos sabões) =====
+  // Para velas ou arranjos basta redefinir estas variáveis, por exemplo:
+  //   velas:    --accent: #d9a03f; --accent-dark: #2d1f16; --accent-soft: #f0c978;
+  //             --tint: #f7ecd6; --band-top: #1b130e; --band-bottom: #2d1f16; --cream: #f6efe2;
+  //   arranjos: --accent: #c9788f; --accent-dark: #4a2a3b; --accent-soft: #e8b4c1;
+  //             --tint: #f8e4e8; --band-top: #261620; --band-bottom: #4a2a3b; --cream: #f8eceb;
+  --accent:      #4a7556;
+  --accent-dark: #2d4a35;
+  --accent-soft: #a9c3a0;
+  --tint:        #e6eddf;
+  --band-top:    #141c15;
+  --band-bottom: #2d4a35;
+  --paper:       #fcfbf6;
+  --cream:       #f4f1e6;
+  --text:        #1f2a22;
+  --muted:       #55605a;
+  --shadow:      rgba(20, 28, 21, .10);
+
+  position: relative;
+  min-height: 100vh;
+  max-width: 100vw;
+  overflow-x: hidden;
+  padding: 150px 0 100px; // espaço para a navbar transparente (120px)
+  font-family: $sans;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 10% 60%, color-mix(in srgb, var(--accent-soft) 30%, transparent), transparent 45%),
+    radial-gradient(circle at 92% 92%, color-mix(in srgb, var(--accent-soft) 22%, transparent), transparent 40%),
+    var(--cream);
+
+  // Faixa escura no topo: a navbar tem texto branco e é transparente,
+  // por isso precisa de um fundo escuro por baixo. Os cartões sobrepõem-se a ela.
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 330px;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 80% at 50% 30%, color-mix(in srgb, var(--accent) 35%, transparent), transparent 70%),
+      linear-gradient(to bottom, var(--band-top) 0%, var(--band-bottom) 65%, transparent 100%);
+  }
 
   .container {
+    position: relative;
+    z-index: 1;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 24px;
   }
 
+  @media (max-width: 1024px) {
+    padding: 120px 0 80px;
+  }
+
   @media (max-width: 768px) {
-    padding: 32px 0 56px;
+    padding: 100px 0 60px;
+
+    &::before {
+      height: 280px;
+    }
 
     .container {
       padding: 0 16px;
     }
   }
 
+  /* ================= BREADCRUMB ================= */
+
   .breadcrumb {
-    margin-bottom: 32px;
-    font-size: 0.85rem;
-    letter-spacing: 0.02em;
-    color: #9a9689;
+    margin-bottom: 36px;
+    font-size: .78rem;
+    font-weight: 400;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .6);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, .4);
 
     a {
-      color: #6b8a5a;
+      color: var(--accent-soft);
       text-decoration: none;
-      transition: color 0.2s;
+      transition: color .25s ease;
 
       &:hover {
-        color: #4f6a41;
+        color: #fff;
         text-decoration: underline;
+        text-underline-offset: 4px;
       }
     }
 
     span {
-      color: #3a3a30;
+      color: #fff;
       font-weight: 500;
     }
 
     @media (max-width: 480px) {
-      margin-bottom: 20px;
-      font-size: 0.78rem;
+      margin-bottom: 22px;
+      font-size: .7rem;
+      letter-spacing: .06em;
     }
   }
+
+  /* ================= LAYOUT ================= */
 
   .product-layout {
     display: grid;
     grid-template-columns: 1.3fr 1fr;
-    gap: 56px;
+    gap: 40px;
     align-items: start;
 
     @media (max-width: 992px) {
       grid-template-columns: 1fr;
-      gap: 36px;
+      gap: 28px;
     }
   }
 
+  // imagem simples (sem galeria): mesmo aspeto do cartão da imagem principal
   .product-image {
     background-color: #fff;
-    border-radius: 12px;
-    padding: 24px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    border: 1px solid color-mix(in srgb, var(--accent) 12%, transparent);
+    border-radius: $radius;
+    padding: 28px;
+    box-shadow: 0 14px 40px var(--shadow);
 
     img {
+      display: block;
       width: 100%;
       height: auto;
-      border-radius: 8px;
-      display: block;
+      border-radius: 10px;
       object-fit: cover;
     }
   }
 
+  /* ================= INFORMAÇÃO (cartão) ================= */
+
   .product-info {
+    background: var(--paper);
+    border: 1px solid color-mix(in srgb, var(--accent) 12%, transparent);
+    border-radius: $radius;
+    padding: 44px 44px 40px;
+    box-shadow: 0 14px 40px var(--shadow);
+
+    @media (max-width: 768px) {
+      padding: 30px 24px 28px;
+    }
+
     h1 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 2.6rem;
-      color: #2f3b28;
-      margin-bottom: 6px;
-      line-height: 1.15;
-      letter-spacing: -0.01em;
+      font-family: $serif;
+      font-weight: 600;
+      font-size: 2.9rem;
+      line-height: 1.1;
+      letter-spacing: -.005em;
+      color: var(--accent-dark);
+      margin-bottom: 10px;
+
+      // traço decorativo por baixo do título
+      &::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 3px;
+        margin-top: 18px;
+        background: linear-gradient(90deg, var(--accent-soft), var(--accent));
+        border-radius: 3px;
+      }
 
       @media (max-width: 768px) {
-        font-size: 2.1rem;
+        font-size: 2.2rem;
       }
 
       @media (max-width: 480px) {
-        font-size: 1.75rem;
+        font-size: 1.85rem;
       }
     }
 
     > .tagline {
+      font-family: $serif;
       font-style: italic;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      color: #8a9a7d;
-      margin-bottom: 32px;
+      font-size: 1.2rem;
+      line-height: 1.5;
+      color: var(--accent);
+      margin-bottom: 30px;
 
       @media (max-width: 480px) {
-        font-size: 0.95rem;
-        margin-bottom: 24px;
+        font-size: 1.05rem;
+        margin-bottom: 22px;
       }
     }
 
     .info-block {
-      margin-bottom: 28px;
+      margin-bottom: 26px;
+
+      // linha fina a separar os blocos
+      & + .info-block {
+        padding-top: 26px;
+        border-top: 1px solid color-mix(in srgb, var(--accent) 16%, transparent);
+      }
 
       &:last-child {
         margin-bottom: 0;
       }
 
       h2 {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.3rem;
+        font-family: $serif;
+        font-size: 1.5rem;
         font-weight: 600;
-        color: #4f6a41;
+        letter-spacing: .01em;
+        color: var(--accent-dark);
         margin-bottom: 10px;
-        letter-spacing: 0.01em;
 
         @media (max-width: 480px) {
-          font-size: 1.15rem;
+          font-size: 1.3rem;
         }
       }
 
       p {
-        color: #55554a;
-        line-height: 1.75;
-        font-size: 1.02rem;
+        font-size: .98rem;
         font-weight: 400;
+        line-height: 1.8;
+        color: var(--muted);
 
         @media (max-width: 480px) {
-          font-size: 0.95rem;
-          line-height: 1.65;
+          font-size: .92rem;
+          line-height: 1.7;
         }
       }
 
@@ -143,25 +243,27 @@
 
         li {
           position: relative;
-          padding-left: 22px;
+          padding-left: 26px;
           margin-bottom: 10px;
-          color: #55554a;
-          line-height: 1.6;
-          font-size: 1.02rem;
+          font-size: .98rem;
+          line-height: 1.7;
+          color: var(--muted);
 
+          // pequena folha em vez de um ponto
           &::before {
-            content: '';
+            content: "";
             position: absolute;
             left: 0;
             top: 9px;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background-color: #a5b98f;
+            width: 10px;
+            height: 10px;
+            border-radius: 0 100% 0 100%;
+            background-color: var(--accent-soft);
+            transform: rotate(-8deg);
           }
 
           @media (max-width: 480px) {
-            font-size: 0.95rem;
+            font-size: .92rem;
           }
         }
       }
@@ -169,10 +271,18 @@
   }
 }
 
+/* ================= GALERIA ================= */
+
 .product-gallery {
   display: flex;
-  gap: 20px;
+  gap: 18px;
   align-items: flex-start;
+
+  // em desktop a galeria acompanha o scroll enquanto se lê a informação
+  @media (min-width: 993px) {
+    position: sticky;
+    top: 24px;
+  }
 
   @media (max-width: 992px) {
     flex-direction: column-reverse;
@@ -183,67 +293,84 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-height: 640px;
+  max-height: 600px;
   overflow-y: auto;
-  padding: 4px;
+  padding: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: #c9cfc4 transparent;
 
   &::-webkit-scrollbar {
     width: 4px;
+    height: 4px;
   }
   &::-webkit-scrollbar-thumb {
-    background: #ccc;
+    background: #c9cfc4;
     border-radius: 4px;
   }
 
   @media (max-width: 992px) {
     flex-direction: row;
     max-height: none;
+    width: 100%;
     overflow-x: auto;
     overflow-y: visible;
+    scroll-snap-type: x proximity;
   }
 
   img {
-    width: 72px;
-    height: 72px;
-    object-fit: cover;
-    border-radius: 6px;
-    cursor: pointer;
-    opacity: 0.55;
-    border: 2px solid transparent;
-    transition: opacity 0.2s, border-color 0.2s, transform 0.2s;
     flex-shrink: 0;
+    width: 76px;
+    height: 76px;
+    object-fit: cover;
+    background: #fff;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 12px var(--shadow, rgba(0, 0, 0, .08));
+    cursor: pointer;
+    opacity: .6;
+    scroll-snap-align: start;
+    transition: opacity .25s ease, border-color .25s ease, transform .25s ease, box-shadow .25s ease;
 
     &:hover {
-      opacity: 0.9;
-      transform: scale(1.03);
+      opacity: .95;
+      transform: translateY(-2px);
     }
 
     &.active {
       opacity: 1;
-      border-color: #6b8a5a;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
     }
 
     @media (max-width: 480px) {
-      width: 56px;
-      height: 56px;
+      width: 58px;
+      height: 58px;
     }
   }
 }
 
 .main-image {
   flex: 1;
+  min-width: 0; // evita que a imagem alargue o cartão dentro do flex
   background-color: #fff;
-  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 12%, transparent);
+  border-radius: $radius;
   padding: 32px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 14px 40px var(--shadow);
+  overflow: hidden;
 
   img {
+    display: block;
     width: 100%;
     height: auto;
-    max-height: 640px;
-    object-fit: contain;
-    display: block;
+    max-height: 600px;
     margin: 0 auto;
+    object-fit: contain;
+    transition: transform .6s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.03);
   }
 
   @media (max-width: 768px) {
@@ -255,10 +382,23 @@
   }
 
   @media (max-width: 480px) {
-    padding: 16px;
+    padding: 14px;
 
     img {
       max-height: 320px;
     }
+  }
+}
+
+/* ================= ACESSIBILIDADE ================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .thumbnails img,
+  .main-image img {
+    transition: none;
+  }
+
+  .main-image:hover img {
+    transform: none;
   }
 }

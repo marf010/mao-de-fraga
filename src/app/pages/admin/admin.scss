@@ -1,0 +1,528 @@
+// =====================================================
+// VARIÁVEIS
+// =====================================================
+
+$bg: #f7f8f5;
+$text: #263a31;
+$title: #293d34;
+$muted: #7a847e;
+$border: #e4e7e2;
+$surface: #ffffff;
+
+$sidebar-bg: #06140c;
+$green: #486a58;
+
+$serif: Georgia, 'Times New Roman', serif;
+
+
+// =====================================================
+// BASE
+// =====================================================
+
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.admin-page {
+  min-height: 100vh;
+  display: flex;
+  background: $bg;
+  color: $text;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Arial,
+    sans-serif;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid rgba(72, 106, 88, 0.45);
+  outline-offset: 2px;
+}
+
+
+// =====================================================
+// SIDEBAR
+// (fica fixa enquanto a página faz scroll)
+// =====================================================
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  width: 230px;
+  height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  padding: 28px 16px;
+  background: $sidebar-bg;
+  color: #ffffff;
+  overflow-y: auto;
+}
+
+.brand {
+  display: block;
+  padding: 8px 10px 34px;
+}
+
+.brand-logo {
+  display: block;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  a {
+    min-height: 46px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 0 13px;
+    border-radius: 9px;
+    color: rgba(255, 255, 255, 0.72);
+    text-decoration: none;
+    font-size: 14px;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.07);
+      color: #ffffff;
+    }
+
+    &.active {
+      background: rgba(255, 255, 255, 0.13);
+      color: #ffffff;
+    }
+  }
+}
+
+.menu-icon {
+  width: 22px;
+  text-align: center;
+  font-size: 17px;
+  opacity: 0.85;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  button {
+    width: 100%;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 0 13px;
+    border: none;
+    border-radius: 9px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.65);
+    font-family: inherit;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.07);
+      color: #ffffff;
+    }
+  }
+}
+
+
+// =====================================================
+// ÁREA PRINCIPAL
+// =====================================================
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+  background: $bg;
+}
+
+
+// =====================================================
+// HEADER
+// =====================================================
+
+.top-header {
+  height: 70px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 42px;
+  background: $surface;
+  border-bottom: 1px solid #e7e9e4;
+}
+
+.header-label {
+  color: #89918c;
+  font-size: 12px;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: right;
+
+  strong {
+    color: #35443d;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  span {
+    color: #929a95;
+    font-size: 11px;
+  }
+}
+
+// "Sair" no header: só em ecrãs pequenos
+.header-logout {
+  display: none;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid $border;
+  border-radius: 8px;
+  background: $surface;
+  color: #46564e;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background: #eef0ed;
+  }
+}
+
+
+// =====================================================
+// DASHBOARD
+// =====================================================
+
+.dashboard {
+  width: 100%;
+  max-width: 1180px;
+  box-sizing: border-box;
+  padding: 42px;
+}
+
+.eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  color: #789184;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+
+// ---------- Boas-vindas ----------
+
+.welcome {
+  margin-bottom: 45px;
+  padding: 30px 34px;
+  background: linear-gradient(135deg, #eef2ec 0%, #f4efe3 100%);
+  border: 1px solid #e3e8e0;
+  border-radius: 14px;
+
+  h1 {
+    margin: 0;
+    color: $title;
+    font-family: $serif;
+    font-size: 34px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+  }
+
+  p {
+    margin: 8px 0 0;
+    color: #67736c;
+    font-size: 15px;
+  }
+}
+
+
+// ---------- Cabeçalho da secção ----------
+
+.section-header {
+  margin-bottom: 20px;
+
+  h2 {
+    margin: 0;
+    color: #30443b;
+    font-family: $serif;
+    font-size: 25px;
+    font-weight: 500;
+  }
+}
+
+
+// =====================================================
+// CARTÕES
+// =====================================================
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.product-card {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(40, 55, 47, 0.035);
+  color: inherit;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: #d5ddd7;
+    box-shadow: 0 10px 28px rgba(40, 55, 47, 0.1);
+
+    .category-icon {
+      transform: scale(1.06);
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    .arrow {
+      transform: translateX(4px);
+    }
+  }
+}
+
+.card-top {
+  height: 125px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.soap {
+    background: #eee7d9;
+  }
+
+  &.candle {
+    background: #e6d5c5;
+  }
+
+  &.arrangement {
+    background: #e2e4d8;
+  }
+}
+
+.category-icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.58);
+  color: #53665b;
+  font-size: 23px;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 22px;
+
+  h3 {
+    margin: 0;
+    color: #30443b;
+    font-family: $serif;
+    font-size: 22px;
+    font-weight: 500;
+  }
+
+  p {
+    margin: 8px 0 0;
+    color: #7f8983;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+}
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 20px;
+  color: $green;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+
+// =====================================================
+// TABLET
+// =====================================================
+
+@media (max-width: 950px) {
+
+  .sidebar {
+    width: 205px;
+  }
+
+  .top-header {
+    padding: 0 32px;
+  }
+
+  .dashboard {
+    padding: 32px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+// =====================================================
+// MOBILE
+// =====================================================
+
+@media (max-width: 700px) {
+
+  .admin-page {
+    flex-direction: column;
+  }
+
+  // A sidebar passa a barra no topo
+  .sidebar {
+    position: static;
+    align-self: stretch;
+    width: 100%;
+    height: auto;
+    padding: 14px 16px;
+    overflow: visible;
+  }
+
+  .brand {
+    padding: 0 4px 12px;
+  }
+
+  .brand-logo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .menu {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 3px;
+
+    a {
+      min-width: max-content;
+    }
+  }
+
+  .sidebar-bottom {
+    display: none;
+  }
+
+  .top-header {
+    height: 60px;
+    padding: 0 20px;
+  }
+
+  .header-label {
+    display: none;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .header-logout {
+    display: inline-block;
+  }
+
+  .user-info {
+    text-align: left;
+  }
+
+  .dashboard {
+    padding: 28px 20px;
+  }
+
+  .welcome {
+    margin-bottom: 35px;
+    padding: 24px 22px;
+
+    h1 {
+      font-size: 28px;
+    }
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+// =====================================================
+// MOVIMENTO REDUZIDO
+// =====================================================
+
+@media (prefers-reduced-motion: reduce) {
+
+  .product-card,
+  .category-icon,
+  .arrow {
+    transition: none;
+  }
+
+  .product-card:hover {
+    transform: none;
+  }
+}

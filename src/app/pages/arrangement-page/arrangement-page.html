@@ -1,7 +1,37 @@
-<app-navbar></app-navbar>
+<header class="navbar">
+    <a routerLink="/" class="logo" (click)="closeMenu()">
+        <img src="logotipo.png" alt="Logo">
+    </a>
+
+    <nav [class.open]="menuOpen()" id="main-nav">
+        <a routerLink="/inicio" routerLinkActive="active" (click)="closeMenu()">INÍCIO</a>
+        <a routerLink="/sabões" routerLinkActive="active" (click)="closeMenu()">SABÕES</a>
+        <a routerLink="/velas" routerLinkActive="active" (click)="closeMenu()">VELAS</a>
+        <a routerLink="/arranjos" routerLinkActive="active" (click)="closeMenu()">ARRANJOS</a>
+        <a routerLink="/sobre" routerLinkActive="active" (click)="closeMenu()">SOBRE</a>
+    </nav>
+
+    <button
+        type="button"
+        class="hamburger"
+        [class.open]="menuOpen()"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="menuOpen()"
+        aria-controls="main-nav"
+        [attr.aria-label]="menuOpen() ? 'Fechar menu' : 'Abrir menu'"
+    >
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</header>
+
+<!-- overlay que fecha o menu ao clicar fora -->
+<div class="menu-overlay" [class.visible]="menuOpen()" (click)="closeMenu()"></div>
 
 <section class="arrangement-page">
     <div class="container">
+
         <div class="page-header">
             <h1>Os Nossos Arranjos de Flores</h1>
             <p>A beleza das flores que permanece, o aroma que encanta. Arranjos de flores de cera, feitos para perfumar e transformar cada espaço.</p>

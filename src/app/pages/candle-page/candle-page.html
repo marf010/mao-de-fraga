@@ -1,26 +1,57 @@
-<div id="colecao">
-    <app-navbar></app-navbar>
-    
-    <section class="candle-page">
-        <div class="container">
-            <div class="page-header">
-                <h1>As Nossas Velas</h1>
-                <p>Deixa-te envolver pelos aromas que podem transformar a tua casa.</p>
+<header class="navbar">
+    <a routerLink="/" class="logo" (click)="closeMenu()">
+        <img src="logotipo.png" alt="Logo">
+    </a>
+
+    <nav [class.open]="menuOpen()" id="main-nav">
+        <a routerLink="/inicio" routerLinkActive="active" (click)="closeMenu()">INÍCIO</a>
+        <a routerLink="/sabões" routerLinkActive="active" (click)="closeMenu()">SABÕES</a>
+        <a routerLink="/velas" routerLinkActive="active" (click)="closeMenu()">VELAS</a>
+        <a routerLink="/arranjos" routerLinkActive="active" (click)="closeMenu()">ARRANJOS</a>
+        <a routerLink="/sobre" routerLinkActive="active" (click)="closeMenu()">SOBRE</a>
+    </nav>
+
+    <button
+        type="button"
+        class="hamburger"
+        [class.open]="menuOpen()"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="menuOpen()"
+        aria-controls="main-nav"
+        [attr.aria-label]="menuOpen() ? 'Fechar menu' : 'Abrir menu'"
+    >
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</header>
+
+<!-- overlay que fecha o menu ao clicar fora -->
+<div class="menu-overlay" [class.visible]="menuOpen()" (click)="closeMenu()"></div>
+
+<section class="candle-page">
+
+    <!-- <div class="leaf-container">
+        <img src="planta.png" alt="planta decorativa" class="leaf">
+    </div> -->
+
+    <div class="container">
+        <div class="page-header">
+            <h1>As Nossas Velas</h1>
+            <p>Deixa-te envolver pelos aromas que podem transformar a tua casa.</p>
+        </div>
+
+        <div class="products-grid">
+
+            <div class="product-card" *ngFor="let candle of candles()" [routerLink]="['/vela', candle.id]">
+                <img [src]="candle.image" [alt]="candle.name">
+
+                <div class="content">
+                    <h3>{{ candle.name }}</h3>
+                </div>
             </div>
 
-            <div class="products-grid">
-
-                <div class="product-card" *ngFor="let candle of candles()" [routerLink]="['/vela', candle.id]">
-                    <img [src]="candle.image" [alt]="candle.name">
-
-                    <div class="content">
-                        <h3>{{ candle.name }}</h3>
-                    </div>
-                </div>
-            </div>   
         </div>
-        
+    </div>
 
-        
-    </section>
-</div>
+</section>

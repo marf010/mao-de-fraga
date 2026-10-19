@@ -1,0 +1,642 @@
+// =====================================================
+// VARIÁVEIS
+// =====================================================
+
+$bg: #f6f7f4;
+$text: #263a31;
+$title: #24382f;
+$muted: #56645d;
+$border: #d8ddd8;
+$border-strong: #bdc9c1;
+$surface: #ffffff;
+$surface-soft: #eef0ed;
+
+$green: #486a58;
+$green-dark: #304f40;
+$green-darker: #243f32;
+
+$serif: Georgia, 'Times New Roman', serif;
+
+
+// =====================================================
+// BASE
+// =====================================================
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background: $bg;
+}
+
+input[hidden] {
+  display: none;
+}
+
+
+// =====================================================
+// PÁGINA
+// =====================================================
+
+.admin-products {
+  width: 100%;
+  max-width: 1250px;
+  box-sizing: border-box;
+  padding: 45px;
+  margin: 0 auto;
+  color: $text;
+}
+
+
+// =====================================================
+// CABEÇALHO
+// =====================================================
+
+.page-header {
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  display: block;
+  margin-bottom: 8px;
+  color: #789184;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+h1 {
+  margin: 0;
+  color: $title;
+  font-family: $serif;
+  font-size: 42px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.total {
+  margin: 10px 0 0;
+  color: $muted;
+  font-size: 16px;
+  font-weight: 500;
+
+  strong {
+    color: $green-dark;
+    font-weight: 700;
+  }
+}
+
+
+// =====================================================
+// MENU
+// (o original tinha texto branco sobre fundo claro,
+//  por isso os links não se viam)
+// =====================================================
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  a {
+    min-height: 42px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 16px;
+    background: $surface;
+    border: 1px solid $border;
+    border-radius: 9px;
+    color: #46564e;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
+
+    &:hover {
+      background: #eef2ee;
+      border-color: $border-strong;
+    }
+
+    &.active {
+      background: $green-dark;
+      border-color: $green-dark;
+      color: #ffffff;
+    }
+  }
+}
+
+.menu-icon {
+  width: 20px;
+  text-align: center;
+  font-size: 16px;
+  opacity: 0.85;
+}
+
+
+// =====================================================
+// LISTA DE PRODUTOS
+// =====================================================
+
+.products-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 35px;
+}
+
+// O <article> não participa no layout: o cartão e o formulário
+// de edição continuam a ser itens diretos da grelha, e o
+// formulário ocupa a linha toda (grid-column: 1 / -1).
+.product-wrapper {
+  display: contents;
+}
+
+.empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 40px 20px;
+  background: $surface;
+  border: 1px dashed $border-strong;
+  border-radius: 14px;
+  color: $muted;
+  font-size: 15px;
+  text-align: center;
+}
+
+
+// =====================================================
+// PRODUTO
+// =====================================================
+
+.product {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px rgba(40, 50, 45, 0.07);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: $border-strong;
+    box-shadow: 0 10px 28px rgba(40, 50, 45, 0.12);
+  }
+
+  h2 {
+    margin: 0 0 10px;
+    color: #263c32;
+    font-family: $serif;
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    overflow-wrap: anywhere;
+  }
+
+  p {
+    margin: 0;
+    color: #596760;
+    font-size: 14px;
+    line-height: 1.6;
+
+    strong {
+      color: #34483e;
+      font-weight: 600;
+    }
+  }
+
+  .product-description {
+    margin-top: 8px;
+  }
+}
+
+.product-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: $surface-soft;
+
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.product-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 22px;
+}
+
+.product-actions {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: auto;
+  padding-top: 22px;
+}
+
+
+// =====================================================
+// BOTÕES BASE
+// =====================================================
+
+button {
+  min-height: 40px;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+// Foco visível para navegação por teclado
+button:focus-visible,
+.menu a:focus-visible {
+  outline: 3px solid rgba(72, 106, 88, 0.35);
+  outline-offset: 2px;
+}
+
+
+// ---------- Editar ----------
+
+.edit-button {
+  background: $green;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(48, 70, 60, 0.12);
+
+  &:hover:not(:disabled) {
+    background: #365644;
+    box-shadow: 0 4px 10px rgba(48, 70, 60, 0.18);
+  }
+}
+
+// ---------- Eliminar ----------
+
+.delete-button {
+  background: #f3e5e2;
+  color: #81463d;
+  border: 1px solid #ead4d0;
+
+  &:hover:not(:disabled) {
+    background: #ead8d4;
+    color: #713b33;
+  }
+}
+
+// ---------- Adicionar ----------
+
+.add-button {
+  margin-top: 35px;
+  min-height: 44px;
+  padding: 12px 24px;
+  background: $green-dark;
+  color: #ffffff;
+  font-size: 15px;
+  box-shadow: 0 3px 8px rgba(48, 79, 64, 0.15);
+
+  &:hover:not(:disabled) {
+    background: $green-darker;
+    box-shadow: 0 5px 14px rgba(48, 79, 64, 0.22);
+  }
+}
+
+// ---------- Guardar ----------
+
+.save-button {
+  background: $green-dark;
+  color: #ffffff;
+  box-shadow: 0 2px 7px rgba(48, 79, 64, 0.15);
+
+  &:hover:not(:disabled) {
+    background: $green-darker;
+    box-shadow: 0 4px 11px rgba(48, 79, 64, 0.2);
+  }
+}
+
+// ---------- Cancelar ----------
+
+.cancel-button {
+  background: $surface-soft;
+  color: #46564e;
+  border: 1px solid #d8ded9;
+
+  &:hover:not(:disabled) {
+    background: #e2e7e3;
+  }
+}
+
+
+// =====================================================
+// FORMULÁRIOS
+// =====================================================
+
+.form {
+  width: 100%;
+  max-width: 700px;
+  box-sizing: border-box;
+  grid-column: 1 / -1;
+  padding: 30px;
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: 14px;
+  box-shadow: 0 5px 20px rgba(40, 50, 45, 0.08);
+
+  h2 {
+    margin: 0;
+    color: #263c32;
+    font-family: $serif;
+    font-size: 28px;
+    font-weight: 600;
+  }
+
+  // <label> e o <span class="label"> das fotografias
+  label,
+  .label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 7px;
+    color: #34483e;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid #cbd2cc;
+    border-radius: 8px;
+    background: $surface;
+    color: #293b33;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &::placeholder {
+      color: #8a948e;
+    }
+
+    &:focus {
+      border-color: $green;
+      box-shadow: 0 0 0 3px rgba(72, 106, 88, 0.14);
+    }
+  }
+
+  textarea {
+    min-height: 110px;
+    resize: vertical;
+    line-height: 1.5;
+  }
+}
+
+.new-form {
+  margin-top: 25px;
+}
+
+.form-header {
+  margin-bottom: 25px;
+
+  .eyebrow {
+    margin-bottom: 7px;
+  }
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+
+  button {
+    margin: 0;
+  }
+}
+
+
+// =====================================================
+// UPLOAD DE IMAGENS
+// =====================================================
+
+.image-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.image-preview {
+  position: relative;
+  width: 180px;
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid $border;
+  border-radius: 10px;
+  background: $surface-soft;
+
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.image-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 180px));
+  gap: 12px;
+
+  // Dentro da grelha, a miniatura ocupa a célula toda
+  .image-preview {
+    width: 100%;
+  }
+}
+
+.image-button {
+  width: fit-content;
+  background: #eef2ee;
+  color: #385244;
+  border: 1px solid #d2dad4;
+
+  &:hover:not(:disabled) {
+    background: #e2e9e4;
+    border-color: $border-strong;
+  }
+}
+
+.image-preview .remove-image {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 30px;
+  height: 30px;
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(50, 45, 42, 0.78);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+
+  &:hover {
+    background: #713b33;
+  }
+}
+
+
+// =====================================================
+// RESPONSIVO
+// =====================================================
+
+@media (max-width: 900px) {
+
+  .admin-products {
+    padding: 35px;
+  }
+
+  h1 {
+    font-size: 38px;
+  }
+}
+
+@media (max-width: 700px) {
+
+  .admin-products {
+    padding: 25px 18px;
+  }
+
+  h1 {
+    font-size: 34px;
+  }
+
+  .total {
+    font-size: 15px;
+  }
+
+  // Menu com scroll horizontal em vez de quebrar linhas
+  .menu {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .products-list {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .product-content {
+    padding: 21px;
+  }
+
+  .product h2 {
+    font-size: 23px;
+  }
+
+  .form {
+    max-width: 100%;
+    padding: 22px;
+  }
+
+  .product-actions,
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  .image-preview {
+    width: 160px;
+  }
+}
+
+@media (max-width: 430px) {
+
+  .admin-products {
+    padding: 22px 15px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  .form {
+    padding: 18px;
+
+    h2 {
+      font-size: 24px;
+    }
+  }
+
+  .image-preview-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+// =====================================================
+// MOVIMENTO REDUZIDO
+// =====================================================
+
+@media (prefers-reduced-motion: reduce) {
+
+  .product,
+  button {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}

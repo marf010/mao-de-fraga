@@ -1,0 +1,15 @@
+[
+    {
+        "id": 11,
+        "name": "Vela de soja",
+        "image": "soja.png",
+        "images": [
+            "soja.png",
+            "sojaFT.jpeg"
+        ],
+        "description": "",
+        "size": "200g",
+        "composition": "",
+        "benefits": "Notas de laranja, rosa, canela e patchouli"
+    }
+]

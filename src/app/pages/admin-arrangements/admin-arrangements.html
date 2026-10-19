@@ -1,0 +1,273 @@
+<div class="admin-products">
+
+  <!-- ================================================= -->
+  <!-- CABEÇALHO -->
+  <!-- ================================================= -->
+  <div class="page-header">
+    <div>
+      <span class="eyebrow">GESTÃO DE PRODUTOS</span>
+      <h1>Gerir arranjos</h1>
+      <p class="total">
+        Total de arranjos: <strong>{{ products.length }}</strong>
+      </p>
+    </div>
+  </div>
+
+  <!-- ================================================= -->
+  <!-- MENU -->
+  <!-- ================================================= -->
+  <nav class="menu">
+    <a routerLink="/admin" routerLinkActive="active"
+       [routerLinkActiveOptions]="{ exact: true }">
+      <span class="menu-icon">⌂</span>
+      <span>Painel</span>
+    </a>
+
+    <a routerLink="/admin/soaps" routerLinkActive="active">
+      <span class="menu-icon">◈</span>
+      <span>Sabonetes</span>
+    </a>
+
+    <a routerLink="/admin/candles" routerLinkActive="active">
+      <span class="menu-icon">◉</span>
+      <span>Velas</span>
+    </a>
+
+    <a routerLink="/admin/arrangements" routerLinkActive="active">
+      <span class="menu-icon">✿</span>
+      <span>Arranjos</span>
+    </a>
+  </nav>
+
+  <!-- ================================================= -->
+  <!-- LISTA DE ARRANJOS -->
+  <!-- ================================================= -->
+  <div class="products-list">
+
+    @for (product of products; track product.id) {
+
+      <article class="product-wrapper">
+
+        <!-- PRODUTO -->
+        <div class="product">
+
+          @if (product.images?.length || product.image) {
+            <div class="product-image">
+              <img
+                [src]="product.images?.[0] ?? product.image"
+                [alt]="product.name"
+                loading="lazy"
+              >
+            </div>
+          }
+
+          <div class="product-content">
+            <h2>{{ product.name }}</h2>
+
+            @if (product.size) {
+              <p><strong>Tamanho:</strong> {{ product.size }}</p>
+            }
+
+            @if (product.description) {
+              <p class="product-description">{{ product.description }}</p>
+            }
+
+            <div class="product-actions">
+              <button type="button" class="edit-button"
+                      (click)="editProduct(product)">
+                Editar
+              </button>
+
+              <button type="button" class="delete-button"
+                      (click)="confirmDelete(product)">
+                Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORMULÁRIO DE EDIÇÃO -->
+        @if (editingProduct?.id === product.id) {
+
+          <div class="form edit-form">
+
+            <div class="form-header">
+              <span class="eyebrow">EDITAR PRODUTO</span>
+              <h2>Editar arranjo</h2>
+            </div>
+
+            <!-- Fotografia -->
+            <span class="label">Fotografia</span>
+
+            <div class="image-upload">
+              @if (editingProduct!.image) {
+                <div class="image-preview">
+                  <img [src]="editingProduct!.image"
+                       [alt]="editingProduct!.name">
+                </div>
+              }
+
+              <input
+                #editImageInput
+                type="file"
+                accept="image/*"
+                hidden
+                (change)="onEditImageSelected($event, editingProduct!)"
+              >
+
+              <button type="button" class="image-button"
+                      (click)="editImageInput.click()">
+                📷 Alterar fotografia
+              </button>
+            </div>
+
+            <!-- Nome -->
+            <label for="edit-name-{{ product.id }}">Nome</label>
+            <input id="edit-name-{{ product.id }}" type="text"
+                   [(ngModel)]="editingProduct!.name">
+
+            <!-- Descrição -->
+            <label for="edit-description-{{ product.id }}">Descrição</label>
+            <textarea id="edit-description-{{ product.id }}"
+                      [(ngModel)]="editingProduct!.description"></textarea>
+
+            <!-- Tamanho -->
+            <label for="edit-size-{{ product.id }}">Tamanho</label>
+            <input id="edit-size-{{ product.id }}" type="text"
+                   [(ngModel)]="editingProduct!.size">
+
+            <!-- Composição -->
+            <label for="edit-composition-{{ product.id }}">Composição</label>
+            <textarea id="edit-composition-{{ product.id }}"
+                      [(ngModel)]="editingProduct!.composition"></textarea>
+
+            <!-- Benefícios -->
+            <label for="edit-benefits-{{ product.id }}">Benefícios</label>
+            <textarea id="edit-benefits-{{ product.id }}"
+                      [(ngModel)]="editingProduct!.benefits"></textarea>
+
+            <!-- Botões -->
+            <div class="form-actions">
+              <button type="button" class="save-button"
+                      [disabled]="!editingProduct!.name?.trim()"
+                      (click)="saveEdit()">
+                Guardar alterações
+              </button>
+
+              <button type="button" class="cancel-button"
+                      (click)="editingProduct = null">
+                Cancelar
+              </button>
+            </div>
+          </div>
+        }
+
+      </article>
+
+    } @empty {
+      <p class="empty">Ainda não existem arranjos.</p>
+    }
+
+  </div>
+
+  <!-- ================================================= -->
+  <!-- BOTÃO ADICIONAR -->
+  <!-- ================================================= -->
+  <button type="button" class="add-button" (click)="showForm = !showForm">
+    {{ showForm ? '✕ Fechar' : '+ Adicionar arranjo' }}
+  </button>
+
+  <!-- ================================================= -->
+  <!-- FORMULÁRIO DE NOVO ARRANJO -->
+  <!-- ================================================= -->
+  @if (showForm) {
+
+    <div class="form new-form">
+
+      <div class="form-header">
+        <span class="eyebrow">NOVO PRODUTO</span>
+        <h2>Novo arranjo</h2>
+      </div>
+
+      <!-- Fotografias -->
+      <span class="label">Fotografias</span>
+
+      <div class="image-upload">
+
+        @if (newProduct.images.length > 0) {
+          <div class="image-preview-grid">
+            @for (img of newProduct.images; track $index) {
+              <div class="image-preview">
+                <img [src]="img" [alt]="newProduct.name || 'Novo arranjo'">
+
+                <button type="button" class="remove-image"
+                        (click)="removeNewImage($index)"
+                        aria-label="Remover fotografia">
+                  ✕
+                </button>
+              </div>
+            }
+          </div>
+        }
+
+        <input
+          #imageInput
+          type="file"
+          accept="image/*"
+          multiple
+          hidden
+          (change)="onNewImagesSelected($event)"
+        >
+
+        <button type="button" class="image-button"
+                (click)="imageInput.click()">
+          📷 Escolher fotografias
+        </button>
+      </div>
+
+      <!-- Nome -->
+      <label for="new-name">Nome</label>
+      <input id="new-name" type="text"
+             [(ngModel)]="newProduct.name"
+             placeholder="Nome do arranjo">
+
+      <!-- Descrição -->
+      <label for="new-description">Descrição</label>
+      <textarea id="new-description"
+                [(ngModel)]="newProduct.description"
+                placeholder="Descrição do arranjo"></textarea>
+
+      <!-- Tamanho -->
+      <label for="new-size">Tamanho</label>
+      <input id="new-size" type="text"
+             [(ngModel)]="newProduct.size"
+             placeholder="Ex.: 25 cm">
+
+      <!-- Composição -->
+      <label for="new-composition">Composição</label>
+      <textarea id="new-composition"
+                [(ngModel)]="newProduct.composition"
+                placeholder="Composição do arranjo"></textarea>
+
+      <!-- Benefícios -->
+      <label for="new-benefits">Benefícios</label>
+      <textarea id="new-benefits"
+                [(ngModel)]="newProduct.benefits"
+                placeholder="Benefícios do arranjo"></textarea>
+
+      <!-- Botões -->
+      <div class="form-actions">
+        <button type="button" class="save-button"
+                [disabled]="!newProduct.name?.trim()"
+                (click)="addProduct()">
+          Guardar arranjo
+        </button>
+
+        <button type="button" class="cancel-button" (click)="resetForm()">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  }
+
+</div>
