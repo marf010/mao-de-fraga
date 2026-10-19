@@ -35,7 +35,7 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "/maosdefraga/",
+              "baseHref": "/m-osdefraga/",
               "budgets": [
                 {
                   "type": "initial",
