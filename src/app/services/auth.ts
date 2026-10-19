@@ -11,7 +11,7 @@ export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
 
-  private apiUrl = 'https://mao-de-fraga.onrender.com/';
+  private apiUrl = 'https://mao-de-fraga.onrender.com/api';
 
   isAuthenticated = signal(
     !!localStorage.getItem('admin_token')
